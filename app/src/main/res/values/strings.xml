@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">ProjectVersion1</string>
+    <string name="title_activity_task_viewer">TaskViewer</string>
 </resources>
