@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "463897188290",
+    "firebase_url": "https://capstoneprojectv1.firebaseio.com",
+    "project_id": "capstoneprojectv1",
+    "storage_bucket": "capstoneprojectv1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:463897188290:android:d12d95ce841cbf7b",
+        "android_client_info": {
+          "package_name": "app.calcounter.com.projectversion1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "463897188290-e46f15a0tis5o3b0b2a5sd1knpn85mpm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "app.calcounter.com.projectversion1",
+            "certificate_hash": "be351c15f57635793465f2f380fc192d2487789f"
+          }
+        },
+        {
+          "client_id": "463897188290-qtjsleqcakhbdm33hiit71fri4kvr1j2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBl6RZ41TkYcpA09hKU5gi7M3ZJd4xkbeU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "463897188290-qtjsleqcakhbdm33hiit71fri4kvr1j2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
