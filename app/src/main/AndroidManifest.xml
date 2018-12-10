@@ -3,6 +3,10 @@
     package="app.calcounter.com.projectversion1">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
 
     <application
         android:allowBackup="true"
@@ -11,7 +15,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".TaskViewer">
+        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,7 +26,21 @@
             android:name=".MainActivity"
             android:label="@string/title_activity_task_viewer"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".DetailsActivity"></activity>
+        <activity android:name=".DetailsActivity" />
+        <activity android:name=".AdministrativeActivity" />
+        <activity android:name=".AdminLocationsActivity" />
+        <activity android:name=".AdminMaterialActivity" />
+        <activity android:name=".AdminTaskActivity" />
+        <activity android:name=".CommentActivity" />
+        <activity android:name=".LocationDetailActivity" />
+
+        <activity android:name=".LocationListActivity" />
+        <activity android:name=".TaskViewer" />
+        <activity android:name=".MaterialActivity" />
+        <activity android:name=".NewLocationActivity" />
+        <activity android:name=".NewLocationRoomsActivity" />
+        <activity android:name=".NewTaskActivity" />
+        <activity android:name=".TaskActivity" />
     </application>
 
 </manifest>

@@ -33,10 +33,8 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder>{
 
         ListItem item = listItems.get(position);
         holder.name.setText(item.getName());
-        holder.description.setText(item.getDescription());
-        holder.rating.setText(item.getRating());
-
-
+        holder.description.setText(item.getDescription() + Integer.toString(item.getPriority()));
+        //holder.rating.setText(item.getRating());
     }
 
     @Override
@@ -47,9 +45,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder>{
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         public TextView name;
         public TextView description;
-        public TextView rating;
-
-
+        //public TextView rating;
 
 
         public ViewHolder(View itemView) {
@@ -57,7 +53,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder>{
 
             name = (TextView) itemView.findViewById(R.id.title);
             description = (TextView) itemView.findViewById(R.id.description);
-            rating = (TextView) itemView.findViewById(R.id.rating);
+            //rating = (TextView) itemView.findViewById(R.id.rating);
             itemView.setOnClickListener(this);
         }
 
@@ -69,7 +65,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder>{
             Intent intent = new Intent(context, DetailsActivity.class);
             intent.putExtra("name",item.getName());
             intent.putExtra("description",item.getDescription());
-            intent.putExtra("rating", item.getRating());
+            //intent.putExtra("rating", item.getRating());
 
             context.startActivity(intent); // this is not an activity need to use a context
 

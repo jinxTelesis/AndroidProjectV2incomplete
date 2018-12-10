@@ -6,7 +6,7 @@ import android.widget.TextView;
 
 public class DetailsActivity extends AppCompatActivity {
 
-    private TextView name, description, rating;
+    private TextView name, description;
     private Bundle extras;
 
 
@@ -19,13 +19,13 @@ public class DetailsActivity extends AppCompatActivity {
 
         name = (TextView) findViewById(R.id.dNameID);
         description = (TextView) findViewById(R.id.dDescritionID);
-        rating = (TextView) findViewById(R.id.dRatingID);
+        //rating = (TextView) findViewById(R.id.dRatingID);
 
         if(extras != null)
         {
             name.setText(extras.getString("name"));
             description.setText(extras.getString("description"));
-            rating.setText(extras.getString("rating"));
+            //rating.setText(extras.getString("rating"));
         }
 
 
