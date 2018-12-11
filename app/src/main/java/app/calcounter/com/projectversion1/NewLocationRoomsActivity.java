@@ -100,7 +100,7 @@ public class NewLocationRoomsActivity extends AppCompatActivity implements OnIte
     }
     public void finishAddingRooms(View view){
 
-        int locationCounter = getIntent().getExtras().getInt("locCounter");// keep track out outside
+
         // locations so it saves it as the correct number for firebase
 
         String addressLineOne = getIntent().getExtras().getString(ADDRESS);
@@ -113,9 +113,6 @@ public class NewLocationRoomsActivity extends AppCompatActivity implements OnIte
             rooms[i] = listItems.get(i).getName();
         }
 
-        locationCounter++;
-        mDocRef = FirebaseFirestore.getInstance().collection("locations").document("loc" + locationCounter); // this is promoted to string
-
         // need the adapter to update
 
         // this is gonna use the address data for the location name
@@ -127,6 +124,12 @@ public class NewLocationRoomsActivity extends AppCompatActivity implements OnIte
         //String authorText = authorView.getText().toString();
 
         //if(quoteText.isEmpty() || authorText.isEmpty()) {return;} // odd statement but works
+
+        int locationCounter = getIntent().getExtras().getInt("locCounter");// keep track out outside
+        locationCounter++;
+        mDocRef = FirebaseFirestore.getInstance().collection("locations").document("loc" + locationCounter); // this is promoted to string
+
+
 
         Map<String,Object> dataToSave = new HashMap<String,Object>();
 

@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -32,7 +33,7 @@ public class AdminLocationsActivity extends Activity {
     // justins
     // justins
 
-    // these should be moved
+    // these should be moved to another file
     public static final String ADDRESS = "address";
     public static final String ADDRESS_2 = "address2";
     public static final String CITY = "city";
@@ -45,8 +46,9 @@ public class AdminLocationsActivity extends Activity {
     private List<LocationListItem> listItems;
     private int dynamicCount = 0;
 
-    // firebase code
-    //private
+
+
+
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -57,6 +59,7 @@ public class AdminLocationsActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_location3);
+
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerviewdre);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

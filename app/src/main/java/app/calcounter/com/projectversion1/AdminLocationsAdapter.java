@@ -77,6 +77,10 @@ public class AdminLocationsAdapter extends RecyclerView.Adapter<AdminLocationsAd
             int position = getAdapterPosition();
             LocationListItem item = listItems.get(position);
 
+
+            // add a add task
+
+
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
             builder.setMessage("Modify " + listItems.get(getAdapterPosition()).getName())
                     .setPositiveButton("Edit", new DialogInterface.OnClickListener() {
