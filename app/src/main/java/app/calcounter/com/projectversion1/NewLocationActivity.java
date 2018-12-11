@@ -41,6 +41,10 @@ public class NewLocationActivity extends AppCompatActivity {
         //sends all the data to rooms activity to handle everything when the user finishes
         Bundle mbundle = new Bundle();
         Intent newLocRooms = new Intent(this, NewLocationRoomsActivity.class);
+
+        Intent previous = getIntent(); // for previous data
+        int x = previous.getExtras().getInt("locCounter");
+        mbundle.putInt("locCounter",x); // counter for number of locations
         mbundle.putString("address", addressLineOne.getText().toString().trim());
         mbundle.putString("address2", addressLineTwo.getText().toString().trim());
         mbundle.putString("city", city.getText().toString().trim());
