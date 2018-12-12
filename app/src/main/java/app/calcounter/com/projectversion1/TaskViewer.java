@@ -85,10 +85,11 @@ public class TaskViewer extends AppCompatActivity {
         Log.e("location counter ", Integer.toString(loc));
 
         Query query = db.collection("tasks").whereEqualTo("rootloc", "loc"+loc);
-        
+
 
         // move into a function
         //db.collection("tasks").
+        
         db.collection("tasks").whereEqualTo("rootloc", "loc"+loc) // will iterate over the collection
                 .get() // this listener should be safe for activity change
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
