@@ -73,6 +73,10 @@ public class TaskViewer extends AppCompatActivity {
         setContentView(R.layout.activity_task_viewer);
        // getActionBar().setTitle("Tasks");
         getSupportActionBar().setTitle("Tasks");
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerviewdre);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        listItems = new ArrayList<>();
 
         returnbtn = (Button) findViewById(R.id.returnbtnTaskViewer);
 
@@ -82,15 +86,41 @@ public class TaskViewer extends AppCompatActivity {
 
         int loc = getIntent().getExtras().getInt("locCounter"); // if this works
         // you can query all tasks that match locCounter
-        Log.e("location counter ", Integer.toString(loc));
+
+        for(int i = 0; i < 100; i++)
+        {
+            Log.e("location counter ", Integer.toString(loc));
+            Log.e("location counter ", Integer.toString(loc));
+            Log.e("location counter ", Integer.toString(loc));
+            Log.e("location counter ", Integer.toString(loc));
+            Log.e("location counter ", Integer.toString(loc));
+            Log.e("location counter ", Integer.toString(loc));
+            Log.e("location counter ", Integer.toString(loc));
+            Log.e("location counter ", Integer.toString(loc));
+            Log.e("location counter ", Integer.toString(loc));
+            Log.e("location counter ", Integer.toString(loc));
+            Log.e("location counter ", Integer.toString(loc));
+            Log.e("location counter ", Integer.toString(loc));
+            Log.e("location counter ", Integer.toString(loc));
+            Log.e("location counter ", Integer.toString(loc));
+            Log.e("location counter ", Integer.toString(loc));
+            Log.e("location counter ", Integer.toString(loc));
+            Log.e("location counter ", Integer.toString(loc));
+            Log.e("location counter ", Integer.toString(loc));
+            Log.e("location counter ", Integer.toString(loc));
+            Log.e("location counter ", Integer.toString(loc));
+            Log.e("location counter ", Integer.toString(loc));
+        }
+
+
 
         Query query = db.collection("tasks").whereEqualTo("rootloc", "loc"+loc);
 
 
         // move into a function
         //db.collection("tasks").
-        
-        db.collection("tasks").whereEqualTo("rootloc", "loc"+loc) // will iterate over the collection
+
+        db.collection("tasks").whereEqualTo("rootloc", "loc9") // will iterate over the collection
                 .get() // this listener should be safe for activity change
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -105,9 +135,21 @@ public class TaskViewer extends AppCompatActivity {
                                 // need data reads here number of task that equal location
                                 Map<String,Object> dataToRead = document.getData();
                                 String nextPriority = dataToRead.get("priority").toString();
+                                Log.e("priority     a>>>>", nextPriority);
+                                Log.e("priority     a>>>>", nextPriority);
+                                Log.e("priority     a>>>>", nextPriority);
+                                Log.e("priority     a>>>>", nextPriority);
+                                Log.e("priority     a>>>>", nextPriority);
+                                Log.e("priority     a>>>>", nextPriority);
+                                Log.e("priority     a>>>>", nextPriority);
+                                Log.e("priority     a>>>>", nextPriority);
+                                Log.e("priority     a>>>>", nextPriority);
+                                Log.e("priority     a>>>>", nextPriority);
+                                Log.e("priority     a>>>>", nextPriority);
 
 
-                                ListItem item = new ListItem(document.getId().toString(), "Priority worked!", Integer.parseInt(nextPriority));
+                                ListItem item = new ListItem("Task" + taskCounterForAdapter, dataToRead.get("taskname").toString(), Integer.parseInt(nextPriority));
+                               // ListItem item = new ListItem("Task50", "booob", 10);
                                 listItems.add(item);
                                 setAdapterValues();
                                 prioritize();
@@ -119,7 +161,7 @@ public class TaskViewer extends AppCompatActivity {
                             Log.e("Firebase blows", "error", task.getException());
                         }
 
-                        setAdapterValues();
+                        //setAdapterValues();
                     }
                 });
 
@@ -175,21 +217,18 @@ public class TaskViewer extends AppCompatActivity {
 //        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 //        setSupportActionBar(toolbar);
 
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerviewdre);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-//        listItems = new ArrayList<>();
-//
-//        for(int i = 0; i < 10; i++)
-//        {
+
+
+
+//        for(int i = 0; i < 10; i++) {
 //            counter++;
-//            ListItem item = new ListItem("Task " + (counter + 1), "Priority", counter%5);
+//        ListItem item = new ListItem("Task " + (counter + 1), "Priority", counter%5);
 //
-//            listItems.add(item);
-//        }
+//        listItems.add(item);
+//    }
 //
-//        setAdapterValues();
+//      setAdapterValues();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
