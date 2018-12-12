@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Parcelable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -121,7 +122,8 @@ public class AdminLocationsAdapter extends RecyclerView.Adapter<AdminLocationsAd
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             Intent intent = new Intent(context, TaskViewer.class);
-                            intent.putExtra("positonFromLocationAdapter", position);
+                            intent.putExtra("positonFromLocationAdapter", position); // not sure if this works correctly
+                            Log.e("admin Location adapter postion", Integer.toString(position));
                             intent.putExtra("isView", true);
                             //intent.putExtra("address", listItems.get(getAdapterPosition()).getName());
                             //intent.putExtra("address2",listItems.get(getAdapterPosition()).getDescription());

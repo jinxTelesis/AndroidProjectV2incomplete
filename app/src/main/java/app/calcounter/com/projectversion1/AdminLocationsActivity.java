@@ -40,7 +40,7 @@ public class AdminLocationsActivity extends Activity {
     public static final String STATE = "state";
     public static final String ZIP = "zip";
 
-    private int locationCounter = 0; // added
+    private int locationCounter = 0;
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private List<LocationListItem> listItems;
@@ -150,6 +150,7 @@ public class AdminLocationsActivity extends Activity {
 
     public void onRestart(){
         super.onRestart();
+        locationCounter = 0;
 
         // needed it will reload all of them
         listItems.clear();
@@ -166,7 +167,7 @@ public class AdminLocationsActivity extends Activity {
                         {
                             for(QueryDocumentSnapshot document : task.getResult())
                             {
-                                //locationCounter++; will display everything twice of both counter
+                                locationCounter++;
                                 if(document.getData() != null) { // prevents crash if null fields
                                     LocationListItem item = new LocationListItem((String) document.getId().toString(), (String) document.get(ADDRESS).toString());
                                     listItems.add(item);

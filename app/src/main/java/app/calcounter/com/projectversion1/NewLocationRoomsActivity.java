@@ -127,6 +127,7 @@ public class NewLocationRoomsActivity extends AppCompatActivity implements OnIte
 
         int locationCounter = getIntent().getExtras().getInt("locCounter");// keep track out outside
         locationCounter++;
+        // this an index problem or a viewing problem
         mDocRef = FirebaseFirestore.getInstance().collection("locations").document("loc" + locationCounter); // this is promoted to string
 
 

@@ -126,6 +126,9 @@ public class NewLocationActivity extends AppCompatActivity {
             Log.e("this is valid input " , Integer.toString(validInput));
             Intent previous = getIntent(); // for previous data
             int x = previous.getExtras().getInt("locCounter");
+            // this will be missing because we didn't increment in rooms
+            x++;
+            // this is critical coming from this window
             mbundle.putInt("locCounter",x); // counter for number of locations
             mbundle.putString("address", addressLineOne.getText().toString().trim());
             mbundle.putString("address2", addressLineTwo.getText().toString().trim());
@@ -133,6 +136,7 @@ public class NewLocationActivity extends AppCompatActivity {
             mbundle.putString("state", state.getText().toString().trim());
             mbundle.putString("zip", zipCode.getText().toString().trim());
             mbundle.putBoolean("isEdit", getIntent().getExtras().getBoolean("isEdit"));
+            mbundle.putBoolean("isView", false);
             newTaskRec.putExtras(mbundle);
             startActivity(newTaskRec);
             finish();
@@ -192,6 +196,7 @@ public class NewLocationActivity extends AppCompatActivity {
             mbundle.putString("state", state.getText().toString().trim());
             mbundle.putString("zip", zipCode.getText().toString().trim());
             mbundle.putBoolean("isEdit", getIntent().getExtras().getBoolean("isEdit"));
+            mbundle.putBoolean("isView",false);
             newLocRooms.putExtras(mbundle);
             startActivity(newLocRooms);
             finish();

@@ -96,8 +96,9 @@ public class TaskViewer extends AppCompatActivity {
         Intent previous = getIntent(); // for previous data
         boolean isView = previous.getExtras().getBoolean("isView");
         int viewPosition = previous.getExtras().getInt("positonFromLocationAdapter");
+        Log.e("this is the adapter position", Integer.toString(viewPosition));
 
-        if(isView)
+        if(isView) // view only version
         {
             db.collection("tasks").whereEqualTo("rootloc", "loc" + viewPosition) // will iterate over the collection
                     .get() // this listener should be safe for activity change
@@ -161,7 +162,7 @@ public class TaskViewer extends AppCompatActivity {
                                         String nextPriority = dataToRead.get("priority").toString();
                                         Log.e("priority     a>>>>", nextPriority);
                                         ListItem item = new ListItem("Task" + taskCounterForAdapter, dataToRead.get("taskname").toString(), Integer.parseInt(nextPriority));
-                                        // ListItem item = new ListItem("Task50", "booob", 10);
+
                                         listItems.add(item);
                                         setAdapterValues(); //abstracted some of the calls to reload recycler
                                         prioritize(); // sorts it
