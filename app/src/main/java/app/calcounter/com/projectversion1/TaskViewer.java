@@ -98,6 +98,9 @@ public class TaskViewer extends AppCompatActivity {
         int viewPosition = previous.getExtras().getInt("positonFromLocationAdapter");
         Log.e("this is the adapter position", Integer.toString(viewPosition));
 
+        taskCounterForAdapter = 0; // this reset is not needed but it is needed with rotations and the fb
+        // keep with the following code for simplicity
+
         if(isView) // view only version
         {
             db.collection("tasks").whereEqualTo("rootloc", "loc" + viewPosition) // will iterate over the collection
@@ -142,7 +145,11 @@ public class TaskViewer extends AppCompatActivity {
         }
         else
         {
-            db.collection("tasks").whereEqualTo("rootloc", "loc9") // will iterate over the collection
+            // this means from location create task
+            //mbundle.putInt("locCounter",x);
+            int tasknum = getIntent().getExtras().getInt("locCounter");
+
+            db.collection("tasks").whereEqualTo("rootloc", "loc" + tasknum) // will iterate over the collection
                     .get() // this listener should be safe for activity change
                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                         @Override
@@ -155,6 +162,7 @@ public class TaskViewer extends AppCompatActivity {
                                     if(document.getData() != null) // prevents crashes with totally null data, but not for single fields
                                     {
                                         taskCounterForAdapter++;
+                                        //
 
                                         //dataToSave.put("priority",temp);
                                         // need data reads here number of task that equal location
@@ -319,32 +327,130 @@ public class TaskViewer extends AppCompatActivity {
                             }
                             int locationCounter = getIntent().getExtras().getInt("locCounter");
 
-                            // set taskcounter from the database.
-                            db.collection("tasks") // will iterate over the collection
-                                    .get() // this listener should be safe for activity change
-                                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                            if(task.isSuccessful())
-                                            {
-                                                for(QueryDocumentSnapshot document : task.getResult())
-                                                {
-                                                    taskCounter++; // increments tasks so they won't overwrite each other
-                                                    // should have this set the adapter from firebase here also to minimize cloud reads
-                                                    // should have this set the adapter from firebase here also to minimize cloud reads
-                                                    // should have this set the adapter from firebase here also to minimize cloud reads
-                                                    //LocationListItem item = new LocationListItem((String)document.getId().toString(), (String)document.get(ADDRESS).toString());
-                                                    //listItems.add(item);
-                                                    //Log.e("it worked like a charm", document.getId() + " => " + document.getData());
 
+
+                            // need to clear view first or items will double up
+                            // need to clear view first or items will double up
+                            // need to clear view first or items will double up
+                            listItems.clear();
+                            recyclerView.removeAllViewsInLayout();
+
+                            //change all tasks to display priority
+                            //change all tasks to display priority
+                            taskCounterForAdapter =0; // this reset is needed
+
+                            if(isView) // view only version
+                            {
+
+                                db.collection("tasks").whereEqualTo("rootloc", "loc" + viewPosition) // will iterate over the collection
+                                        .get() // this listener should be safe for activity change
+                                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                                if(task.isSuccessful())
+                                                {
+                                                    for(QueryDocumentSnapshot document : task.getResult())
+                                                    {
+                                                        if(document.getData() != null) // prevents crashes with null data does not prevent crash from singlular null reading
+                                                        {
+                                                            taskCounterForAdapter++;
+
+                                                            //dataToSave.put("priority",temp);
+                                                            // need data reads here number of task that equal location
+                                                            Map<String,Object> dataToRead = document.getData();
+                                                            String nextPriority = dataToRead.get("priority").toString();
+                                                            Log.e("priority     a>>>>", nextPriority);
+
+
+
+                                                            ListItem item = new ListItem("Task" + taskCounterForAdapter, dataToRead.get("taskname").toString(), Integer.parseInt(nextPriority));
+                                                            // ListItem item = new ListItem("Task50", "booob", 10);
+                                                            listItems.add(item);
+                                                            setAdapterValues();
+                                                            prioritize();
+                                                            Log.e("it worked like a charm", document.getId() + " => " + document.getData());
+                                                        }
+
+                                                    }
+
+                                                }else
+                                                {
+                                                    Log.e("Firebase blows", "error", task.getException());
                                                 }
 
-                                            }else
-                                            {
-                                                Log.e("Firebase blows", "error", task.getException());
+                                                //setAdapterValues();
                                             }
-                                        }
-                                    });
+                                        });
+                            }
+                            else
+                            {
+                                // this means from location create task
+                                //mbundle.putInt("locCounter",x);
+                                int tasknum = getIntent().getExtras().getInt("locCounter");
+
+                                db.collection("tasks").whereEqualTo("rootloc", "loc" + tasknum) // will iterate over the collection
+                                        .get() // this listener should be safe for activity change
+                                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                                if(task.isSuccessful())
+                                                {
+                                                    for(QueryDocumentSnapshot document : task.getResult())
+                                                    {
+
+                                                        if(document.getData() != null) // prevents crashes with totally null data, but not for single fields
+                                                        {
+                                                            taskCounterForAdapter++;
+                                                            //
+
+                                                            //dataToSave.put("priority",temp);
+                                                            // need data reads here number of task that equal location
+                                                            Map<String,Object> dataToRead = document.getData();
+                                                            String nextPriority = dataToRead.get("priority").toString();
+                                                            Log.e("priority     a>>>>", nextPriority);
+                                                            ListItem item = new ListItem("Task" + taskCounterForAdapter, dataToRead.get("taskname").toString(), Integer.parseInt(nextPriority));
+
+                                                            listItems.add(item);
+                                                            setAdapterValues(); //abstracted some of the calls to reload recycler
+                                                            prioritize(); // sorts it
+                                                            Log.e("it worked like a charm", document.getId() + " => " + document.getData());
+                                                        }
+
+                                                    }
+
+                                                }else
+                                                {
+                                                    Log.e("Firebase blows", "error", task.getException());
+                                                }
+
+                                                //setAdapterValues();
+                                            }
+                                        });
+                            }
+
+
+
+
+//                            db.collection("tasks") // will iterate over the collection
+//                                    .get() // this listener should be safe for activity change
+//                                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//                                        @Override
+//                                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                                            if(task.isSuccessful())
+//                                            {
+//                                                for(QueryDocumentSnapshot document : task.getResult())
+//                                                {
+//                                                    taskCounter++; // increments tasks so they won't overwrite each other
+//
+//
+//                                                }
+//
+//                                            }else
+//                                            {
+//                                                Log.e("Firebase blows", "error", task.getException());
+//                                            }
+//                                        }
+//                                    });
 
                             // working on right now
                             // working on right now

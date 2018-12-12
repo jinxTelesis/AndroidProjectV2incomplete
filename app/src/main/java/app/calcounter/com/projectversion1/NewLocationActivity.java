@@ -127,7 +127,6 @@ public class NewLocationActivity extends AppCompatActivity {
             Intent previous = getIntent(); // for previous data
             int x = previous.getExtras().getInt("locCounter");
             // this will be missing because we didn't increment in rooms
-            x++;
             // this is critical coming from this window
             mbundle.putInt("locCounter",x); // counter for number of locations
             mbundle.putString("address", addressLineOne.getText().toString().trim());
