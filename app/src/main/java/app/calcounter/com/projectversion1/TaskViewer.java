@@ -87,83 +87,108 @@ public class TaskViewer extends AppCompatActivity {
         int loc = getIntent().getExtras().getInt("locCounter"); // if this works
         // you can query all tasks that match locCounter
 
-        for(int i = 0; i < 100; i++)
+
+
+        //Query query = db.collection("tasks").whereEqualTo("rootloc", "loc"+loc);
+        // not sure how to read this vs iterating over the collection
+
+
+        Intent previous = getIntent(); // for previous data
+        boolean isView = previous.getExtras().getBoolean("isView");
+        int viewPosition = previous.getExtras().getInt("positonFromLocationAdapter");
+
+        if(isView)
         {
-            Log.e("location counter ", Integer.toString(loc));
-            Log.e("location counter ", Integer.toString(loc));
-            Log.e("location counter ", Integer.toString(loc));
-            Log.e("location counter ", Integer.toString(loc));
-            Log.e("location counter ", Integer.toString(loc));
-            Log.e("location counter ", Integer.toString(loc));
-            Log.e("location counter ", Integer.toString(loc));
-            Log.e("location counter ", Integer.toString(loc));
-            Log.e("location counter ", Integer.toString(loc));
-            Log.e("location counter ", Integer.toString(loc));
-            Log.e("location counter ", Integer.toString(loc));
-            Log.e("location counter ", Integer.toString(loc));
-            Log.e("location counter ", Integer.toString(loc));
-            Log.e("location counter ", Integer.toString(loc));
-            Log.e("location counter ", Integer.toString(loc));
-            Log.e("location counter ", Integer.toString(loc));
-            Log.e("location counter ", Integer.toString(loc));
-            Log.e("location counter ", Integer.toString(loc));
-            Log.e("location counter ", Integer.toString(loc));
-            Log.e("location counter ", Integer.toString(loc));
-            Log.e("location counter ", Integer.toString(loc));
+            db.collection("tasks").whereEqualTo("rootloc", "loc" + viewPosition) // will iterate over the collection
+                    .get() // this listener should be safe for activity change
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if(task.isSuccessful())
+                            {
+                                for(QueryDocumentSnapshot document : task.getResult())
+                                {
+                                    if(document.getData() != null) // prevents crashes with null data does not prevent crash from singlular null reading
+                                    {
+                                        taskCounterForAdapter++;
+
+                                        //dataToSave.put("priority",temp);
+                                        // need data reads here number of task that equal location
+                                        Map<String,Object> dataToRead = document.getData();
+                                        String nextPriority = dataToRead.get("priority").toString();
+                                        Log.e("priority     a>>>>", nextPriority);
+
+
+
+                                        ListItem item = new ListItem("Task" + taskCounterForAdapter, dataToRead.get("taskname").toString(), Integer.parseInt(nextPriority));
+                                        // ListItem item = new ListItem("Task50", "booob", 10);
+                                        listItems.add(item);
+                                        setAdapterValues();
+                                        prioritize();
+                                        Log.e("it worked like a charm", document.getId() + " => " + document.getData());
+                                    }
+
+                                }
+
+                            }else
+                            {
+                                Log.e("Firebase blows", "error", task.getException());
+                            }
+
+                            //setAdapterValues();
+                        }
+                    });
+        }
+        else
+        {
+            db.collection("tasks").whereEqualTo("rootloc", "loc9") // will iterate over the collection
+                    .get() // this listener should be safe for activity change
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if(task.isSuccessful())
+                            {
+                                for(QueryDocumentSnapshot document : task.getResult())
+                                {
+
+                                    if(document.getData() != null) // prevents crashes with totally null data, but not for single fields
+                                    {
+                                        taskCounterForAdapter++;
+
+                                        //dataToSave.put("priority",temp);
+                                        // need data reads here number of task that equal location
+                                        Map<String,Object> dataToRead = document.getData();
+                                        String nextPriority = dataToRead.get("priority").toString();
+                                        Log.e("priority     a>>>>", nextPriority);
+                                        ListItem item = new ListItem("Task" + taskCounterForAdapter, dataToRead.get("taskname").toString(), Integer.parseInt(nextPriority));
+                                        // ListItem item = new ListItem("Task50", "booob", 10);
+                                        listItems.add(item);
+                                        setAdapterValues(); //abstracted some of the calls to reload recycler
+                                        prioritize(); // sorts it
+                                        Log.e("it worked like a charm", document.getId() + " => " + document.getData());
+                                    }
+
+                                }
+
+                            }else
+                            {
+                                Log.e("Firebase blows", "error", task.getException());
+                            }
+
+                            //setAdapterValues();
+                        }
+                    });
         }
 
-
-
-        Query query = db.collection("tasks").whereEqualTo("rootloc", "loc"+loc);
+        //boolean isView = (boolean) getIntent().getExtras().get("isView");
+        //intent.putExtra("positonFromLocationAdapter", position);
+        //intent.putExtra("isView", true);
 
 
         // move into a function
         //db.collection("tasks").
 
-        db.collection("tasks").whereEqualTo("rootloc", "loc9") // will iterate over the collection
-                .get() // this listener should be safe for activity change
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if(task.isSuccessful())
-                        {
-                            for(QueryDocumentSnapshot document : task.getResult())
-                            {
-                                taskCounterForAdapter++;
 
-                                //dataToSave.put("priority",temp);
-                                // need data reads here number of task that equal location
-                                Map<String,Object> dataToRead = document.getData();
-                                String nextPriority = dataToRead.get("priority").toString();
-                                Log.e("priority     a>>>>", nextPriority);
-                                Log.e("priority     a>>>>", nextPriority);
-                                Log.e("priority     a>>>>", nextPriority);
-                                Log.e("priority     a>>>>", nextPriority);
-                                Log.e("priority     a>>>>", nextPriority);
-                                Log.e("priority     a>>>>", nextPriority);
-                                Log.e("priority     a>>>>", nextPriority);
-                                Log.e("priority     a>>>>", nextPriority);
-                                Log.e("priority     a>>>>", nextPriority);
-                                Log.e("priority     a>>>>", nextPriority);
-                                Log.e("priority     a>>>>", nextPriority);
-
-
-                                ListItem item = new ListItem("Task" + taskCounterForAdapter, dataToRead.get("taskname").toString(), Integer.parseInt(nextPriority));
-                               // ListItem item = new ListItem("Task50", "booob", 10);
-                                listItems.add(item);
-                                setAdapterValues();
-                                prioritize();
-                                Log.e("it worked like a charm", document.getId() + " => " + document.getData());
-                            }
-
-                        }else
-                        {
-                            Log.e("Firebase blows", "error", task.getException());
-                        }
-
-                        //setAdapterValues();
-                    }
-                });
 
         // move into a function
         returnbtn.setOnClickListener(new View.OnClickListener() {

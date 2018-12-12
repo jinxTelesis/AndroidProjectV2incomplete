@@ -1,18 +1,22 @@
 package app.calcounter.com.projectversion1;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class NewLocationActivity extends AppCompatActivity {
 
     // justins
     // justins
     // justins
+    // this needs logic to prevent null reads
 
     private Button addTaskbtn;
 
@@ -31,7 +35,46 @@ public class NewLocationActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // this needs the code to create location
-                goToAddTask();
+                int validInput = 0;
+
+                if(!addressLineOne.getText().toString().trim().equals(""))
+                {
+                    Log.e("this is the output ", addressLineOne.getText().toString());
+                    validInput++;
+                }
+
+                if(!city.getText().toString().trim().equals(""))
+                {
+                    validInput++;
+                    Log.e("this is the output ", addressLineOne.getText().toString());
+                }
+
+                if(!state.getText().toString().trim().equals(""))
+                {
+                    validInput++;
+                    Log.e("this is the output ", addressLineOne.getText().toString());
+                }
+
+                if(!zipCode.getText().toString().trim().equals(""))
+                {
+                    validInput++;
+                    Log.e("this is the output ", addressLineOne.getText().toString());
+                }
+
+                if(validInput == 4)
+                {
+                    goToAddTask();
+                    Log.e("this is the output ", addressLineOne.getText().toString());
+                }
+                else {
+                    // tells user they didn't enter enough data
+                    Context context = getApplicationContext();
+                    CharSequence text = "Need valid task input data!";
+                    int duration = Toast.LENGTH_LONG;
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                }
+
             }
         });
 
@@ -55,18 +98,56 @@ public class NewLocationActivity extends AppCompatActivity {
         Bundle mbundle = new Bundle();
         Intent newTaskRec = new Intent(this, TaskViewer.class);
 
-        Intent previous = getIntent(); // for previous data
-        int x = previous.getExtras().getInt("locCounter");
-        mbundle.putInt("locCounter",x); // counter for number of locations
-        mbundle.putString("address", addressLineOne.getText().toString().trim());
-        mbundle.putString("address2", addressLineTwo.getText().toString().trim());
-        mbundle.putString("city", city.getText().toString().trim());
-        mbundle.putString("state", state.getText().toString().trim());
-        mbundle.putString("zip", zipCode.getText().toString().trim());
-        mbundle.putBoolean("isEdit", getIntent().getExtras().getBoolean("isEdit"));
-        newTaskRec.putExtras(mbundle);
-        startActivity(newTaskRec);
-        finish();
+        // justin's code need validation
+        int validInput = 0;
+
+        if(!addressLineOne.getText().toString().trim().equals(""))
+        {
+            validInput++;
+        }
+
+        if(!city.getText().toString().trim().equals(""))
+        {
+            validInput++;
+        }
+
+        if(!state.getText().toString().trim().equals(""))
+        {
+            validInput++;
+        }
+
+        if(!zipCode.getText().toString().trim().equals(""))
+        {
+            validInput++;
+        }
+
+        if(validInput == 4)
+        {
+            Log.e("this is valid input " , Integer.toString(validInput));
+            Intent previous = getIntent(); // for previous data
+            int x = previous.getExtras().getInt("locCounter");
+            mbundle.putInt("locCounter",x); // counter for number of locations
+            mbundle.putString("address", addressLineOne.getText().toString().trim());
+            mbundle.putString("address2", addressLineTwo.getText().toString().trim());
+            mbundle.putString("city", city.getText().toString().trim());
+            mbundle.putString("state", state.getText().toString().trim());
+            mbundle.putString("zip", zipCode.getText().toString().trim());
+            mbundle.putBoolean("isEdit", getIntent().getExtras().getBoolean("isEdit"));
+            newTaskRec.putExtras(mbundle);
+            startActivity(newTaskRec);
+            finish();
+        }
+        else {
+            // tells user they didn't enter enough data
+            Context context = getApplicationContext();
+            CharSequence text = "Need valid task input data!";
+            int duration = Toast.LENGTH_LONG;
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
+        }
+
+        return;
+
 
     }
 
@@ -75,18 +156,59 @@ public class NewLocationActivity extends AppCompatActivity {
         Bundle mbundle = new Bundle();
         Intent newLocRooms = new Intent(this, NewLocationRoomsActivity.class);
 
-        Intent previous = getIntent(); // for previous data
-        int x = previous.getExtras().getInt("locCounter");
-        mbundle.putInt("locCounter",x); // counter for number of locations
-        mbundle.putString("address", addressLineOne.getText().toString().trim());
-        mbundle.putString("address2", addressLineTwo.getText().toString().trim());
-        mbundle.putString("city", city.getText().toString().trim());
-        mbundle.putString("state", state.getText().toString().trim());
-        mbundle.putString("zip", zipCode.getText().toString().trim());
-        mbundle.putBoolean("isEdit", getIntent().getExtras().getBoolean("isEdit"));
-        newLocRooms.putExtras(mbundle);
-        startActivity(newLocRooms);
-        finish();
+
+        // justin's code needed validation
+        int validInput = 0;
+
+        if(!addressLineOne.getText().toString().trim().equals(""))
+        {
+            validInput++;
+        }
+
+        if(!city.getText().toString().trim().equals(""))
+        {
+            validInput++;
+        }
+
+        if(!state.getText().toString().trim().equals(""))
+        {
+            validInput++;
+        }
+
+        if(!zipCode.getText().toString().trim().equals(""))
+        {
+            validInput++;
+        }
+
+        if(validInput == 4)
+        {
+            Log.e("this is valid input " , Integer.toString(validInput));
+            Intent previous = getIntent(); // for previous data
+            int x = previous.getExtras().getInt("locCounter");
+            mbundle.putInt("locCounter",x); // counter for number of locations
+            mbundle.putString("address", addressLineOne.getText().toString().trim());
+            mbundle.putString("address2", addressLineTwo.getText().toString().trim());
+            mbundle.putString("city", city.getText().toString().trim());
+            mbundle.putString("state", state.getText().toString().trim());
+            mbundle.putString("zip", zipCode.getText().toString().trim());
+            mbundle.putBoolean("isEdit", getIntent().getExtras().getBoolean("isEdit"));
+            newLocRooms.putExtras(mbundle);
+            startActivity(newLocRooms);
+            finish();
+        }
+        else
+        {
+            // tells user they didn't enter enough data
+            Context context = getApplicationContext();
+            CharSequence text = "Need valid task input data!";
+            int duration = Toast.LENGTH_LONG;
+            Toast toast = Toast.makeText(context,text,duration);
+            toast.show();
+        }
+
+        return;
+
+
         // sent everything to rooms activity
     }
 }

@@ -121,10 +121,10 @@ public class AdminLocationsAdapter extends RecyclerView.Adapter<AdminLocationsAd
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             Intent intent = new Intent(context, TaskViewer.class);
-
+                            intent.putExtra("positonFromLocationAdapter", position);
                             intent.putExtra("isView", true);
-                            intent.putExtra("address", listItems.get(getAdapterPosition()).getName());
-                            intent.putExtra("address2",listItems.get(getAdapterPosition()).getDescription());
+                            //intent.putExtra("address", listItems.get(getAdapterPosition()).getName());
+                            //intent.putExtra("address2",listItems.get(getAdapterPosition()).getDescription());
                             context.startActivity(intent);
                             // does not add it yet, on the
 

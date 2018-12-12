@@ -61,6 +61,8 @@ public class AdminLocationsActivity extends Activity {
         setContentView(R.layout.activity_admin_location3);
 
 
+
+
         recyclerView = (RecyclerView) findViewById(R.id.recyclerviewdre);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 //
@@ -77,10 +79,18 @@ public class AdminLocationsActivity extends Activity {
                         {
                             for(QueryDocumentSnapshot document : task.getResult())
                             {
-                                locationCounter++;
-                                LocationListItem item = new LocationListItem((String)document.getId().toString(), (String)document.get(ADDRESS).toString());
-                                listItems.add(item);
-                                Log.e("it worked like a charm", document.getId() + " => " + document.getData());
+
+                                //Todo this breaks if it returns from the view
+                                // change it so null subfields don't trip this up
+
+                                if(document.getData() != null) // prevents crash if null data
+                                {
+                                    locationCounter++;
+                                    LocationListItem item = new LocationListItem((String)document.getId().toString(), (String)document.get(ADDRESS).toString());
+                                    listItems.add(item);
+                                    Log.e("it worked like a charm", document.getId() + " => " + document.getData());
+                                }
+
                             }
 
                         }else
@@ -156,10 +166,13 @@ public class AdminLocationsActivity extends Activity {
                         {
                             for(QueryDocumentSnapshot document : task.getResult())
                             {
-                                //locationCounter++;
-                                LocationListItem item = new LocationListItem((String)document.getId().toString(), (String)document.get(ADDRESS).toString());
-                                listItems.add(item);
-                                Log.e("it worked like a charm", document.getId() + " => " + document.getData());
+                                //locationCounter++; will display everything twice of both counter
+                                if(document.getData() != null) { // prevents crash if null fields
+                                    LocationListItem item = new LocationListItem((String) document.getId().toString(), (String) document.get(ADDRESS).toString());
+                                    listItems.add(item);
+                                    Log.e("it worked like a charm", document.getId() + " => " + document.getData());
+
+                                }
                             }
 
                         }else
