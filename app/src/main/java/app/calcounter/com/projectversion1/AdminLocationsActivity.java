@@ -33,6 +33,8 @@ public class AdminLocationsActivity extends Activity {
     // justins
     // justins
 
+    // locations recyclerviewer
+
     // these should be moved to another file
     public static final String ADDRESS = "address";
     public static final String ADDRESS_2 = "address2";
@@ -82,8 +84,9 @@ public class AdminLocationsActivity extends Activity {
 
                                 //Todo this breaks if it returns from the view
                                 // change it so null subfields don't trip this up
+                                // need a real solution to this not hack
 
-                                if(document.getData() != null) // prevents crash if null data
+                                if(document.getData() != null && document.get(ADDRESS) != null) // prevents crash if null data
                                 {
                                     locationCounter++;
                                     LocationListItem item = new LocationListItem((String)document.getId().toString(), (String)document.get(ADDRESS).toString());
@@ -168,7 +171,7 @@ public class AdminLocationsActivity extends Activity {
                             for(QueryDocumentSnapshot document : task.getResult())
                             {
                                 locationCounter++;
-                                if(document.getData() != null) { // prevents crash if null fields
+                                if(document.getData() != null && document.get(ADDRESS) != null) { // prevents crash if null fields
                                     LocationListItem item = new LocationListItem((String) document.getId().toString(), (String) document.get(ADDRESS).toString());
                                     listItems.add(item);
                                     Log.e("it worked like a charm", document.getId() + " => " + document.getData());

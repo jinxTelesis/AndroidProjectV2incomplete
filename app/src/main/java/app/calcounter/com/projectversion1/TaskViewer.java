@@ -57,6 +57,7 @@ public class TaskViewer extends AppCompatActivity {
     public static final String ZIP = "zip";
 
     private Button returnbtn;
+    int viewPosition =0;
 
 
     // added
@@ -95,11 +96,12 @@ public class TaskViewer extends AppCompatActivity {
 
         Intent previous = getIntent(); // for previous data
         boolean isView = previous.getExtras().getBoolean("isView");
-        int viewPosition = previous.getExtras().getInt("positonFromLocationAdapter");
+        viewPosition = previous.getExtras().getInt("positonFromLocationAdapter");
         Log.e("this is the adapter position", Integer.toString(viewPosition));
 
         taskCounterForAdapter = 0; // this reset is not needed but it is needed with rotations and the fb
         // keep with the following code for simplicity
+
 
         if(isView) // view only version
         {
@@ -124,7 +126,7 @@ public class TaskViewer extends AppCompatActivity {
 
 
 
-                                        ListItem item = new ListItem("Task" + taskCounterForAdapter, dataToRead.get("taskname").toString(), Integer.parseInt(nextPriority));
+                                        ListItem item = new ListItem("Task" + taskCounterForAdapter, "priority " + dataToRead.get("priority").toString(), Integer.parseInt(nextPriority));
                                         // ListItem item = new ListItem("Task50", "booob", 10);
                                         listItems.add(item);
                                         setAdapterValues();
@@ -149,6 +151,8 @@ public class TaskViewer extends AppCompatActivity {
             //mbundle.putInt("locCounter",x);
             int tasknum = getIntent().getExtras().getInt("locCounter");
 
+
+
             db.collection("tasks").whereEqualTo("rootloc", "loc" + tasknum) // will iterate over the collection
                     .get() // this listener should be safe for activity change
                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -169,7 +173,7 @@ public class TaskViewer extends AppCompatActivity {
                                         Map<String,Object> dataToRead = document.getData();
                                         String nextPriority = dataToRead.get("priority").toString();
                                         Log.e("priority     a>>>>", nextPriority);
-                                        ListItem item = new ListItem("Task" + taskCounterForAdapter, dataToRead.get("taskname").toString(), Integer.parseInt(nextPriority));
+                                        ListItem item = new ListItem("Task" + taskCounterForAdapter, "priority " + dataToRead.get("priority").toString(), Integer.parseInt(nextPriority));
 
                                         listItems.add(item);
                                         setAdapterValues(); //abstracted some of the calls to reload recycler
@@ -205,45 +209,63 @@ public class TaskViewer extends AppCompatActivity {
             public void onClick(View view) {
                 Intent returnIntent = new Intent(TaskViewer.this, AdminLocationsActivity.class);
 
-                String addressLineOne = getIntent().getExtras().getString(ADDRESS);
-                String addressLineTwo = getIntent().getExtras().getString(ADDRESS_2);
-                String city = getIntent().getExtras().getString(CITY);
-                String state = getIntent().getExtras().getString(STATE);
-                String zip = getIntent().getExtras().getString(ZIP);
-                String[] rooms = new String[listItems.size()];
-                for (int i = 0; i < rooms.length; i++){
-                    rooms[i] = listItems.get(i).getName();
+                final boolean isView = getIntent().getExtras().getBoolean("isView");
+
+                // if this is removed it will add nulls into the database
+                if(isView) // shortcircuit back without bad data
+                {
+                    Log.e("the is a view feature worked", "worked worked worked");
+                    finish();
+                    startActivity(returnIntent);
                 }
-                int locationCounter = getIntent().getExtras().getInt("locCounter");// keep track out outside
-                locationCounter++;
-                mDocRef = FirebaseFirestore.getInstance().collection("locations").document("loc" + locationCounter); // this is promoted to string
 
-
-
-                Map<String,Object> dataToSave = new HashMap<String,Object>();
-
-                // don't need to add counter because it is save on doc name?
-                dataToSave.put(ADDRESS,addressLineOne);
-                dataToSave.put(ADDRESS_2,addressLineTwo);
-                dataToSave.put(CITY,city);
-                dataToSave.put(STATE,state);
-                dataToSave.put(ZIP,zip);
-
-
-                mDocRef.set((dataToSave)).addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Log.d("Location saved", "Location saved");
+                if(!isView)
+                {
+                    Log.e("the is a view feature didnt work", "this is fucked");
+                    String addressLineOne = getIntent().getExtras().getString(ADDRESS);
+                    String addressLineTwo = getIntent().getExtras().getString(ADDRESS_2);
+                    String city = getIntent().getExtras().getString(CITY);
+                    String state = getIntent().getExtras().getString(STATE);
+                    String zip = getIntent().getExtras().getString(ZIP);
+                    String[] rooms = new String[listItems.size()];
+                    for (int i = 0; i < rooms.length; i++){
+                        rooms[i] = listItems.get(i).getName();
                     }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.d("Loc didn't save", "didn't save loc");
-                    }
-                });
+                    int locationCounter = getIntent().getExtras().getInt("locCounter");// keep track out outside
+                    locationCounter++;
+                    mDocRef = FirebaseFirestore.getInstance().collection("locations").document("loc" + locationCounter); // this is promoted to string
 
-                finish();
-                startActivity(returnIntent);
+
+
+                    Map<String,Object> dataToSave = new HashMap<String,Object>();
+
+                    // don't need to add counter because it is save on doc name?
+                    dataToSave.put(ADDRESS,addressLineOne);
+                    dataToSave.put(ADDRESS_2,addressLineTwo);
+                    dataToSave.put(CITY,city);
+                    dataToSave.put(STATE,state);
+                    dataToSave.put(ZIP,zip);
+
+
+                    mDocRef.set((dataToSave)).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Log.d("Location saved", "Location saved");
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Log.d("Loc didn't save", "didn't save loc");
+                        }
+                    });
+
+
+
+                    finish();
+                    startActivity(returnIntent);
+                }
+
+
             }
         });
 
@@ -363,7 +385,7 @@ public class TaskViewer extends AppCompatActivity {
 
 
 
-                                                            ListItem item = new ListItem("Task" + taskCounterForAdapter, dataToRead.get("taskname").toString(), Integer.parseInt(nextPriority));
+                                                            ListItem item = new ListItem("Task" + taskCounterForAdapter, dataToRead.get("priority").toString(), Integer.parseInt(nextPriority));
                                                             // ListItem item = new ListItem("Task50", "booob", 10);
                                                             listItems.add(item);
                                                             setAdapterValues();
@@ -388,6 +410,7 @@ public class TaskViewer extends AppCompatActivity {
                                 //mbundle.putInt("locCounter",x);
                                 int tasknum = getIntent().getExtras().getInt("locCounter");
 
+
                                 db.collection("tasks").whereEqualTo("rootloc", "loc" + tasknum) // will iterate over the collection
                                         .get() // this listener should be safe for activity change
                                         .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -408,7 +431,7 @@ public class TaskViewer extends AppCompatActivity {
                                                             Map<String,Object> dataToRead = document.getData();
                                                             String nextPriority = dataToRead.get("priority").toString();
                                                             Log.e("priority     a>>>>", nextPriority);
-                                                            ListItem item = new ListItem("Task" + taskCounterForAdapter, dataToRead.get("taskname").toString(), Integer.parseInt(nextPriority));
+                                                            ListItem item = new ListItem("Task" + taskCounterForAdapter, "priority" + dataToRead.get("priority").toString(), Integer.parseInt(nextPriority));
 
                                                             listItems.add(item);
                                                             setAdapterValues(); //abstracted some of the calls to reload recycler
@@ -463,13 +486,14 @@ public class TaskViewer extends AppCompatActivity {
 
                             // need to read existing tasks also so we don't overwrite
                             // need task number
-                            taskCounter++;
-                            mDocRef = FirebaseFirestore.getInstance().collection("tasks").document("task" + taskCounter);
+
+                            ++taskCounter;
+                            mDocRef = FirebaseFirestore.getInstance().collection("tasks").document("task" + (taskCounter +1));
                             Map<String,Object> dataToSave = new HashMap<String,Object>();
 
                             dataToSave.put("taskname",m_TextTask); // puts name string
                             dataToSave.put("priority",temp); // the priority number, already validated
-                            dataToSave.put("rootloc","loc" +locationCounter);
+                            dataToSave.put("rootloc","loc" + locationCounter);
 
                             mDocRef.set(dataToSave).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
