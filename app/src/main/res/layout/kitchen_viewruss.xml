@@ -1,0 +1,1241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:fillViewport="true">
+
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/inspection"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/location_prompt"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView1" />
+
+        <Spinner
+            android:id="@+id/location_spinner"
+            android:layout_width="220dp"
+            android:layout_height="23dp"
+            android:layout_marginStart="16dp"
+            android:entries="@array/location_array"
+            android:prompt="@string/location_prompt"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView2"></Spinner>
+
+        <TextView
+            android:id="@+id/textView20"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="Kitchen"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/location_spinner" />
+
+        <TextView
+            android:id="@+id/textView27"
+            android:layout_width="54dp"
+            android:layout_height="13dp"
+            android:layout_marginStart="56dp"
+            android:text="Acceptable"
+            android:textSize="10sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView20" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="120dp"
+            android:orientation="vertical"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView27">
+
+                <TextView
+                    android:id="@+id/textView26"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="3dp"
+                    android:text="Ceiling"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView20" />
+
+                <Switch
+                    android:id="@+id/ceilingSwitch"
+                    android:layout_width="53dp"
+                    android:layout_height="25dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="4dp"
+                    android:checked="false"
+                    android:showText="true"
+                    android:textOff="Yes"
+                    android:textOn="No" />
+
+                <EditText
+                    android:id="@+id/etCeiling"
+                    android:layout_width="258dp"
+                    android:layout_height="44dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView28"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:text="Doors"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView20" />
+
+                <Switch
+                    android:id="@+id/doorSwitch"
+                    android:layout_width="53dp"
+                    android:layout_height="25dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginStart="8dp"
+                    android:checked="false"
+                    android:showText="true"
+                    android:textOff="Yes"
+                    android:textOn="No" />
+
+                <EditText
+                    android:id="@+id/etDoor"
+                    android:layout_width="258dp"
+                    android:layout_height="44dp"
+                    android:layout_marginStart="8dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView29"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:text="Floor"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView20" />
+
+                <Switch
+                    android:id="@+id/floorSwitch"
+                    android:layout_width="53dp"
+                    android:layout_height="25dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginStart="8dp"
+                    android:checked="false"
+                    android:showText="true"
+                    android:textOff="Yes"
+                    android:textOn="No" />
+
+                <EditText
+                    android:id="@+id/etFloor"
+                    android:layout_width="258dp"
+                    android:layout_height="44dp"
+                    android:layout_marginStart="8dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView30"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:text="Fridge"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView20" />
+
+                <Switch
+                    android:id="@+id/fridgeSwitch"
+                    android:layout_width="53dp"
+                    android:layout_height="25dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginStart="8dp"
+                    android:checked="false"
+                    android:showText="true"
+                    android:textOff="Yes"
+                    android:textOn="No" />
+
+                <EditText
+                    android:id="@+id/etFridge"
+                    android:layout_width="258dp"
+                    android:layout_height="44dp"
+                    android:layout_marginStart="8dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView31"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:text="Stove"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView20" />
+
+                <Switch
+                    android:id="@+id/stoveSwitch"
+                    android:layout_width="53dp"
+                    android:layout_height="25dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginStart="8dp"
+                    android:checked="false"
+                    android:showText="true"
+                    android:textOff="Yes"
+                    android:textOn="No" />
+
+                <EditText
+                    android:id="@+id/etStove"
+                    android:layout_width="258dp"
+                    android:layout_height="44dp"
+                    android:layout_marginStart="8dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView32"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:text="Microwave"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView20" />
+
+                <Switch
+                    android:id="@+id/microwaveSwitch"
+                    android:layout_width="53dp"
+                    android:layout_height="25dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginStart="8dp"
+                    android:checked="false"
+                    android:showText="true"
+                    android:textOff="Yes"
+                    android:textOn="No" />
+
+                <EditText
+                    android:id="@+id/etMicrowave"
+                    android:layout_width="258dp"
+                    android:layout_height="44dp"
+                    android:layout_marginStart="8dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView33"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:text="Dishwasher"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView20" />
+
+                <Switch
+                    android:id="@+id/dishwasherSwitch"
+                    android:layout_width="53dp"
+                    android:layout_height="25dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginStart="8dp"
+                    android:checked="false"
+                    android:showText="true"
+                    android:textOff="Yes"
+                    android:textOn="No" />
+
+                <EditText
+                    android:id="@+id/etDishwasher"
+                    android:layout_width="258dp"
+                    android:layout_height="44dp"
+                    android:layout_marginStart="8dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView34"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:text="Appliances"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView20" />
+
+                <Switch
+                    android:id="@+id/applianceSwitchSwitch"
+                    android:layout_width="53dp"
+                    android:layout_height="25dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginStart="8dp"
+                    android:checked="false"
+                    android:showText="true"
+                    android:textOff="Yes"
+                    android:textOn="No" />
+
+                <EditText
+                    android:id="@+id/etAppliance"
+                    android:layout_width="258dp"
+                    android:layout_height="44dp"
+                    android:layout_marginStart="8dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView35"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:text="Plumbing/Sink"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView20" />
+
+                <Switch
+                    android:id="@+id/plumbingSwitch"
+                    android:layout_width="53dp"
+                    android:layout_height="25dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginStart="8dp"
+                    android:checked="false"
+                    android:showText="true"
+                    android:textOff="Yes"
+                    android:textOn="No" />
+
+                <EditText
+                    android:id="@+id/etPlumbing"
+                    android:layout_width="258dp"
+                    android:layout_height="44dp"
+                    android:layout_marginStart="8dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView36"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:text="Cabinets"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView20" />
+
+                <Switch
+                    android:id="@+id/cabinetSwitch"
+                    android:layout_width="53dp"
+                    android:layout_height="25dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginStart="8dp"
+                    android:checked="false"
+                    android:showText="true"
+                    android:textOff="Yes"
+                    android:textOn="No" />
+
+                <EditText
+                    android:id="@+id/etCabinets"
+                    android:layout_width="258dp"
+                    android:layout_height="44dp"
+                    android:layout_marginStart="8dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView37"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:text="Electric Fixtures"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView20" />
+
+                <Switch
+                    android:id="@+id/electricalSwitch"
+                    android:layout_width="53dp"
+                    android:layout_height="25dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginStart="8dp"
+                    android:checked="false"
+                    android:showText="true"
+                    android:textOff="Yes"
+                    android:textOn="No" />
+
+                <EditText
+                    android:id="@+id/etElectrical"
+                    android:layout_width="258dp"
+                    android:layout_height="44dp"
+                    android:layout_marginStart="8dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView38"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:text="Windows/Blinds"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView20" />
+
+                <Switch
+                    android:id="@+id/windowSwitch"
+                    android:layout_width="53dp"
+                    android:layout_height="25dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginStart="8dp"
+                    android:checked="false"
+                    android:showText="true"
+                    android:textOff="Yes"
+                    android:textOn="No" />
+
+                <EditText
+                    android:id="@+id/etWindows"
+                    android:layout_width="258dp"
+                    android:layout_height="44dp"
+                    android:layout_marginStart="8dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView39"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:text="Other"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView20" />
+
+                <Switch
+                    android:id="@+id/kitchenOtherSwitch"
+                    android:layout_width="53dp"
+                    android:layout_height="25dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginStart="8dp"
+                    android:checked="false"
+                    android:showText="true"
+                    android:textOff="Yes"
+                    android:textOn="No" />
+
+                <EditText
+                    android:id="@+id/etKitchenOther"
+                    android:layout_width="258dp"
+                    android:layout_height="44dp"
+                    android:layout_marginStart="8dp" />
+            </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView40"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="12dp"
+            android:text="Dining Room"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView41"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:text="Doors"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView20" />
+
+                <Switch
+                    android:id="@+id/diningDoorSwitch"
+                    android:layout_width="53dp"
+                    android:layout_height="25dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginStart="8dp"
+                    android:checked="false"
+                    android:showText="true"
+                    android:textOff="Yes"
+                    android:textOn="No" />
+
+                <EditText
+                    android:id="@+id/etDiningDoor"
+                    android:layout_width="258dp"
+                    android:layout_height="44dp"
+                    android:layout_marginStart="8dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView42"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:text="Walls"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView20" />
+
+                <Switch
+                    android:id="@+id/diningWallSwitch"
+                    android:layout_width="53dp"
+                    android:layout_height="25dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginStart="8dp"
+                    android:checked="false"
+                    android:showText="true"
+                    android:textOff="Yes"
+                    android:textOn="No" />
+
+                <EditText
+                    android:id="@+id/etDiningWalls"
+                    android:layout_width="258dp"
+                    android:layout_height="44dp"
+                    android:layout_marginStart="8dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView43"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:text="Ceiling"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView20" />
+
+                <Switch
+                    android:id="@+id/diningCeilingSwitch"
+                    android:layout_width="53dp"
+                    android:layout_height="25dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginStart="8dp"
+                    android:checked="false"
+                    android:showText="true"
+                    android:textOff="Yes"
+                    android:textOn="No" />
+
+                <EditText
+                    android:id="@+id/etDiningCeiling"
+                    android:layout_width="258dp"
+                    android:layout_height="44dp"
+                    android:layout_marginStart="8dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView44"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:text="Floor"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView20" />
+
+                <Switch
+                    android:id="@+id/diningFloorSwitch"
+                    android:layout_width="53dp"
+                    android:layout_height="25dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginStart="8dp"
+                    android:checked="false"
+                    android:showText="true"
+                    android:textOff="Yes"
+                    android:textOn="No" />
+
+                <EditText
+                    android:id="@+id/etDiningFloor"
+                    android:layout_width="258dp"
+                    android:layout_height="44dp"
+                    android:layout_marginStart="8dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView45"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:text="Electric Fixtures"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView20" />
+
+                <Switch
+                    android:id="@+id/diningElectricalSwitch"
+                    android:layout_width="53dp"
+                    android:layout_height="25dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginStart="8dp"
+                    android:checked="false"
+                    android:showText="true"
+                    android:textOff="Yes"
+                    android:textOn="No" />
+
+                <EditText
+                    android:id="@+id/etDiningElectrical"
+                    android:layout_width="258dp"
+                    android:layout_height="44dp"
+                    android:layout_marginStart="8dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView46"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:text="Windows/Blinds"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView20" />
+
+                <Switch
+                    android:id="@+id/diningWindowsSwitch"
+                    android:layout_width="53dp"
+                    android:layout_height="25dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginStart="8dp"
+                    android:checked="false"
+                    android:showText="true"
+                    android:textOff="Yes"
+                    android:textOn="No" />
+
+                <EditText
+                    android:id="@+id/etDiningWindows"
+                    android:layout_width="258dp"
+                    android:layout_height="44dp"
+                    android:layout_marginStart="8dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView47"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:text="Furniture"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView20" />
+
+                <Switch
+                    android:id="@+id/diningFurnitureSwitch"
+                    android:layout_width="53dp"
+                    android:layout_height="25dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginStart="8dp"
+                    android:checked="false"
+                    android:showText="true"
+                    android:textOff="Yes"
+                    android:textOn="No" />
+
+                <EditText
+                    android:id="@+id/etDiningFurniture"
+                    android:layout_width="258dp"
+                    android:layout_height="44dp"
+                    android:layout_marginStart="8dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView48"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:text="Other"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView20" />
+
+                <Switch
+                    android:id="@+id/diningOtherSwitch"
+                    android:layout_width="53dp"
+                    android:layout_height="25dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginStart="8dp"
+                    android:checked="false"
+                    android:showText="true"
+                    android:textOff="Yes"
+                    android:textOn="No" />
+
+                <EditText
+                    android:id="@+id/etDiningOther"
+                    android:layout_width="258dp"
+                    android:layout_height="44dp"
+                    android:layout_marginStart="8dp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView49"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:text="Living Room"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView50"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:text="Doors"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView20" />
+
+                <Switch
+                    android:id="@+id/livingDoorSwitch"
+                    android:layout_width="53dp"
+                    android:layout_height="25dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginStart="8dp"
+                    android:checked="false"
+                    android:showText="true"
+                    android:textOff="Yes"
+                    android:textOn="No" />
+
+                <EditText
+                    android:id="@+id/etLivingDoor"
+                    android:layout_width="258dp"
+                    android:layout_height="44dp"
+                    android:layout_marginStart="8dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView51"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:text="Walls"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView20" />
+
+                <Switch
+                    android:id="@+id/livingWallSwitch"
+                    android:layout_width="53dp"
+                    android:layout_height="25dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginStart="8dp"
+                    android:checked="false"
+                    android:showText="true"
+                    android:textOff="Yes"
+                    android:textOn="No" />
+
+                <EditText
+                    android:id="@+id/etLivingWalls"
+                    android:layout_width="258dp"
+                    android:layout_height="44dp"
+                    android:layout_marginStart="8dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView52"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:text="Ceiling"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView20" />
+
+                <Switch
+                    android:id="@+id/livingCeilingSwitch"
+                    android:layout_width="53dp"
+                    android:layout_height="25dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginStart="8dp"
+                    android:checked="false"
+                    android:showText="true"
+                    android:textOff="Yes"
+                    android:textOn="No" />
+
+                <EditText
+                    android:id="@+id/etLivingCeiling"
+                    android:layout_width="258dp"
+                    android:layout_height="44dp"
+                    android:layout_marginStart="8dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView53"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:text="Floor"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView20" />
+
+                <Switch
+                    android:id="@+id/livingFloorSwitch"
+                    android:layout_width="53dp"
+                    android:layout_height="25dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginStart="8dp"
+                    android:checked="false"
+                    android:showText="true"
+                    android:textOff="Yes"
+                    android:textOn="No" />
+
+                <EditText
+                    android:id="@+id/etLivingFloor"
+                    android:layout_width="258dp"
+                    android:layout_height="44dp"
+                    android:layout_marginStart="8dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView54"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:text="Electric Fixtures"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView20" />
+
+                <Switch
+                    android:id="@+id/livingElectricalSwitch"
+                    android:layout_width="53dp"
+                    android:layout_height="25dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginStart="8dp"
+                    android:checked="false"
+                    android:showText="true"
+                    android:textOff="Yes"
+                    android:textOn="No" />
+
+                <EditText
+                    android:id="@+id/etLivingElectrical"
+                    android:layout_width="258dp"
+                    android:layout_height="44dp"
+                    android:layout_marginStart="8dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView55"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:text="Windows/Blinds"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView20" />
+
+                <Switch
+                    android:id="@+id/livingWindowSwitch"
+                    android:layout_width="53dp"
+                    android:layout_height="25dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginStart="8dp"
+                    android:checked="false"
+                    android:showText="true"
+                    android:textOff="Yes"
+                    android:textOn="No" />
+
+                <EditText
+                    android:id="@+id/etLivingWindows"
+                    android:layout_width="258dp"
+                    android:layout_height="44dp"
+                    android:layout_marginStart="8dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView56"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:text="Furniture"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView20" />
+
+                <Switch
+                    android:id="@+id/livingFurnitureSwitch"
+                    android:layout_width="53dp"
+                    android:layout_height="25dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginStart="8dp"
+                    android:checked="false"
+                    android:showText="true"
+                    android:textOff="Yes"
+                    android:textOn="No" />
+
+                <EditText
+                    android:id="@+id/etLivingFurniture"
+                    android:layout_width="258dp"
+                    android:layout_height="44dp"
+                    android:layout_marginStart="8dp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView57"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:text="Den"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView58"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:text="Doors"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView20" />
+
+                <Switch
+                    android:id="@+id/denDoorSwitch"
+                    android:layout_width="53dp"
+                    android:layout_height="25dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginStart="8dp"
+                    android:checked="false"
+                    android:showText="true"
+                    android:textOff="Yes"
+                    android:textOn="No" />
+
+                <EditText
+                    android:id="@+id/etDenDoor"
+                    android:layout_width="258dp"
+                    android:layout_height="44dp"
+                    android:layout_marginStart="8dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView59"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:text="Walls"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView20" />
+
+                <Switch
+                    android:id="@+id/denWallSwitch"
+                    android:layout_width="53dp"
+                    android:layout_height="25dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginStart="8dp"
+                    android:checked="false"
+                    android:showText="true"
+                    android:textOff="Yes"
+                    android:textOn="No" />
+
+                <EditText
+                    android:id="@+id/etDenWalls"
+                    android:layout_width="258dp"
+                    android:layout_height="44dp"
+                    android:layout_marginStart="8dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView60"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:text="Ceiling"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView20" />
+
+                <Switch
+                    android:id="@+id/denCeilingSwitch"
+                    android:layout_width="53dp"
+                    android:layout_height="25dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginStart="8dp"
+                    android:checked="false"
+                    android:showText="true"
+                    android:textOff="Yes"
+                    android:textOn="No" />
+
+                <EditText
+                    android:id="@+id/etDenCeiling"
+                    android:layout_width="258dp"
+                    android:layout_height="44dp"
+                    android:layout_marginStart="8dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView61"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:text="Floor"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView20" />
+
+                <Switch
+                    android:id="@+id/denFloorSwitch"
+                    android:layout_width="53dp"
+                    android:layout_height="25dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginStart="8dp"
+                    android:checked="false"
+                    android:showText="true"
+                    android:textOff="Yes"
+                    android:textOn="No" />
+
+                <EditText
+                    android:id="@+id/etDenFloor"
+                    android:layout_width="258dp"
+                    android:layout_height="44dp"
+                    android:layout_marginStart="8dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView62"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:text="Electric Fixtures"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView20" />
+
+                <Switch
+                    android:id="@+id/denElectricalSwitch"
+                    android:layout_width="53dp"
+                    android:layout_height="25dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginStart="8dp"
+                    android:checked="false"
+                    android:showText="true"
+                    android:textOff="Yes"
+                    android:textOn="No" />
+
+                <EditText
+                    android:id="@+id/etDenElectrical"
+                    android:layout_width="258dp"
+                    android:layout_height="44dp"
+                    android:layout_marginStart="8dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView63"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:text="Windows/Blinds"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView20" />
+
+                <Switch
+                    android:id="@+id/denWindowSwitch"
+                    android:layout_width="53dp"
+                    android:layout_height="25dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginStart="8dp"
+                    android:checked="false"
+                    android:showText="true"
+                    android:textOff="Yes"
+                    android:textOn="No" />
+
+                <EditText
+                    android:id="@+id/etDenWindows"
+                    android:layout_width="258dp"
+                    android:layout_height="44dp"
+                    android:layout_marginStart="8dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView64"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:text="Furniture"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView20" />
+
+                <Switch
+                    android:id="@+id/denFurnitureSwitch"
+                    android:layout_width="53dp"
+                    android:layout_height="25dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginStart="8dp"
+                    android:checked="false"
+                    android:showText="true"
+                    android:textOff="Yes"
+                    android:textOn="No" />
+
+                <EditText
+                    android:id="@+id/etDenFurniture"
+                    android:layout_width="258dp"
+                    android:layout_height="44dp"
+                    android:layout_marginStart="8dp" />
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+    </android.support.constraint.ConstraintLayout>
+    </ScrollView>

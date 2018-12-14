@@ -23,7 +23,10 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -38,6 +41,7 @@ import app.calcounter.com.projectversion1.Model.LocationListItem;
 
 public class TaskViewer extends AppCompatActivity {
 
+    public static final String LOCATION_COUNTER_FB = "LocationCounterFB";
     //Recycler
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
@@ -49,6 +53,7 @@ public class TaskViewer extends AppCompatActivity {
     private String m_TextPriority = "";
     private int taskCounter = 0;
     private int taskCounterForAdapter = 0;
+    public static final String LAST_DOCUMENT_ID = "LastDocumentID";
 
     public static final String ADDRESS = "address";
     public static final String ADDRESS_2 = "address2";
@@ -62,6 +67,7 @@ public class TaskViewer extends AppCompatActivity {
 
     // added
     private DocumentReference mDocRef;
+    private DocumentReference mLocalTotal = FirebaseFirestore.getInstance().collection("appSetup").document("initFile");
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
 
@@ -227,13 +233,50 @@ public class TaskViewer extends AppCompatActivity {
                     String city = getIntent().getExtras().getString(CITY);
                     String state = getIntent().getExtras().getString(STATE);
                     String zip = getIntent().getExtras().getString(ZIP);
+                    String locationDocID = getIntent().getExtras().getString(LAST_DOCUMENT_ID);
                     String[] rooms = new String[listItems.size()];
                     for (int i = 0; i < rooms.length; i++){
                         rooms[i] = listItems.get(i).getName();
                     }
                     int locationCounter = getIntent().getExtras().getInt("locCounter");// keep track out outside
                     locationCounter++;
-                    mDocRef = FirebaseFirestore.getInstance().collection("locations").document("loc" + locationCounter); // this is promoted to string
+
+
+                    //old code
+                    //old code
+                    //old code
+
+                    //mDocRef = FirebaseFirestore.getInstance().collection("locations").document("loc" + locationCounter);
+
+                    if(locationDocID == null)
+                    {
+                        locationDocID = "loc0";
+                    }
+
+                    if(locationDocID.length() == 4)
+                    {
+                        locationDocID = locationDocID.substring(3);
+                        Log.e("test",locationDocID);
+                    }
+
+                    if(locationDocID.length() == 5)
+                    {
+                        locationDocID = locationDocID.substring(3,5);
+                        Log.e("test",locationDocID);
+                    }
+
+                    if(locationDocID.length() == 6)
+                    {
+                        locationDocID = locationDocID.substring(3,6);
+                        Log.e("test",locationDocID);
+                    }
+
+                    Log.e("this is the string value", locationDocID);
+                    int temp = Integer.parseInt(locationDocID);
+                    temp++;
+
+
+                    mDocRef = FirebaseFirestore.getInstance().collection("locations").document("loc" + temp); // this is promoted to string
 
 
 
@@ -246,10 +289,52 @@ public class TaskViewer extends AppCompatActivity {
                     dataToSave.put(STATE,state);
                     dataToSave.put(ZIP,zip);
 
+                    // need to retrive this value outside the listener
+
+
 
                     mDocRef.set((dataToSave)).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
+                            // this means the location saved to firebase and thus the counter needs to be increased
+                            // so the project does not overwrite a existing location after deletions
+
+
+                            // this is to store it as a hashmap can it just be stored as the boxed type?
+                            String localLocationCounter = "";
+                            mLocalTotal.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                @Override
+                                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                    if(documentSnapshot.exists())
+                                    {
+                                        String localLocationCounter = documentSnapshot.getString(LOCATION_COUNTER_FB);
+                                    }
+                                    else
+                                    {
+                                        String localLocationCounter = "0";
+                                    }
+                                }
+                            });
+                            int temp =0;
+                            try{
+                                temp = Integer.parseInt(localLocationCounter);
+                            }catch(Exception e)
+                            {
+
+                            }
+                            temp++;
+                            // this is overly complicated to store as a hashmap
+                            Map<String,Object> locationCounterOnFireBase = new HashMap<String, Object>();
+                            locationCounterOnFireBase.put(LOCATION_COUNTER_FB,Integer.toString(temp));
+
+                            mLocalTotal.set(locationCounterOnFireBase).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    // actually puts the value up
+                                }
+                            });
+
+
                             Log.d("Location saved", "Location saved");
                         }
                     }).addOnFailureListener(new OnFailureListener() {

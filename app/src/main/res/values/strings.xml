@@ -93,4 +93,56 @@
     <string name="returnstring">return</string>
 
 
+    <!-- Strings related to login -->
+
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="submit">Submit</string>
+
+
+    <string name="inspection">Inspection</string>
+
+    <string name="kitchen">Kitchen</string>
+    <string name="dining_room">Dining Room</string>
+    <string name="living_room">Living Room</string>
+    <string name="den">Den</string>
+
+    <string name="bedroom_1">Bedroom 1</string>
+    <string name="bedroom_2">Bedroom 2</string>
+    <string name="bedroom_3">Bedroom 3</string>
+    <string name="bedroom_4">Bedroom 4</string>
+
+    <string name="bathroom_1">Bathroom 1</string>
+    <string name="bathroom_2">Bathroom 2</string>
+    <string name="bathroom_3">Bathroom 3</string>
+
+
+    <string name="acceptable">Acceptable</string>
+    <string name="ceiling">Ceiling</string>
+    <string name="walls">Walls</string>
+    <string name="doors">Doors</string>
+    <string name="floor">Floor</string>
+    <string name="fridge">Fridge</string>
+    <string name="stove">Stove</string>
+    <string name="microwave">Microwave</string>
+    <string name="dishwasher">Dishwasher</string>
+    <string name="appliances">Appliances</string>
+    <string name="plumbing">Plumbing/Sink</string>
+    <string name="cabinets">Cabinets</string>
+    <string name="electric_fixtures">Electric Fixtures</string>
+    <string name="windows_blinds">Windows/Blinds</string>
+    <string name="furniture">Furniture</string>
+    <string name="other">Other</string>
+
+
+
+
+
+
+
+
 </resources>
+
+
+
+

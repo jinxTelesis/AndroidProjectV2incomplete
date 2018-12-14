@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import static app.calcounter.com.projectversion1.AdminLocationsActivity.LAST_DOCUMENT_ID;
+
 public class NewLocationActivity extends AppCompatActivity {
 
     // justins
@@ -126,8 +128,11 @@ public class NewLocationActivity extends AppCompatActivity {
             Log.e("this is valid input " , Integer.toString(validInput));
             Intent previous = getIntent(); // for previous data
             int x = previous.getExtras().getInt("locCounter");
+            String lastlocationID = previous.getExtras().getString(LAST_DOCUMENT_ID);
             // this will be missing because we didn't increment in rooms
             // this is critical coming from this window
+
+            mbundle.putString(LAST_DOCUMENT_ID,lastlocationID);
             mbundle.putInt("locCounter",x); // counter for number of locations
             mbundle.putString("address", addressLineOne.getText().toString().trim());
             mbundle.putString("address2", addressLineTwo.getText().toString().trim());
@@ -188,6 +193,9 @@ public class NewLocationActivity extends AppCompatActivity {
             Log.e("this is valid input " , Integer.toString(validInput));
             Intent previous = getIntent(); // for previous data
             int x = previous.getExtras().getInt("locCounter");
+            String lastlocationID = previous.getExtras().getString(LAST_DOCUMENT_ID);
+
+            mbundle.putString(LAST_DOCUMENT_ID,lastlocationID);
             mbundle.putInt("locCounter",x); // counter for number of locations
             mbundle.putString("address", addressLineOne.getText().toString().trim());
             mbundle.putString("address2", addressLineTwo.getText().toString().trim());

@@ -1,8 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
-    <color name="colorWhite">#ffffff</color>
+
+<color name="colorPrimary">#526778</color>
+
+<color name="colorPrimaryDark">#242834</color>
+
+<color name="colorAccent">#A1B5BE</color>
+
+<color name="colorWhite">#ffffff</color>
+
+<!-- Used for Background -->
+
+<color name="colorCashmere">#f4f6f5</color>
+
+<!-- Used for Text Color -->
+
+<color name="colorGunmetal">#242834</color>
+
+<!-- Used for Button Background -->
+
+<color name="colorGray">#DADDE2</color>
+
 </resources>
 

@@ -17,6 +17,7 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
@@ -24,7 +25,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import app.calcounter.com.projectversion1.Model.LocationData;
 import app.calcounter.com.projectversion1.Model.RoomListItem;
+
+import static app.calcounter.com.projectversion1.TaskViewer.LOCATION_COUNTER_FB;
 
 public class NewLocationRoomsActivity extends AppCompatActivity implements OnItemSelectedListener{
 
@@ -32,6 +36,7 @@ public class NewLocationRoomsActivity extends AppCompatActivity implements OnIte
     public static final String ADDRESS = "address";
     public static final String ADDRESS_2 = "address2";
     public static final String CITY = "city";
+    public static final String LAST_DOCUMENT_ID = "LastDocumentID";
     public static final String STATE = "state";
     public static final String ZIP = "zip";
     private DocumentReference mDocRef;
@@ -45,6 +50,7 @@ public class NewLocationRoomsActivity extends AppCompatActivity implements OnIte
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private List<RoomListItem> listItems;
+    private DocumentReference mLocalTotal = FirebaseFirestore.getInstance().collection("appSetup").document("initFile");
     String selectedSpin;
 
     @Override
@@ -108,6 +114,7 @@ public class NewLocationRoomsActivity extends AppCompatActivity implements OnIte
         String city = getIntent().getExtras().getString(CITY);
         String state = getIntent().getExtras().getString(STATE);
         String zip = getIntent().getExtras().getString(ZIP);
+        String locationDocID = getIntent().getExtras().getString(LAST_DOCUMENT_ID);
         String[] rooms = new String[listItems.size()];
         for (int i = 0; i < rooms.length; i++){
             rooms[i] = listItems.get(i).getName();
@@ -125,34 +132,165 @@ public class NewLocationRoomsActivity extends AppCompatActivity implements OnIte
 
         //if(quoteText.isEmpty() || authorText.isEmpty()) {return;} // odd statement but works
 
+        // this should still work
+        // this should still work
+
         int locationCounter = getIntent().getExtras().getInt("locCounter");// keep track out outside
         locationCounter++;
-        // this an index problem or a viewing problem
-        mDocRef = FirebaseFirestore.getInstance().collection("locations").document("loc" + locationCounter); // this is promoted to string
+        // this an index problem or a viewing problem?
 
 
 
-        Map<String,Object> dataToSave = new HashMap<String,Object>();
+        // this is the other area that needs that fb counter
 
-        // don't need to add counter because it is save on doc name?
-        dataToSave.put(ADDRESS,addressLineOne);
-        dataToSave.put(ADDRESS_2,addressLineTwo);
-        dataToSave.put(CITY,city);
-        dataToSave.put(STATE,state);
-        dataToSave.put(ZIP,zip);
+        // the adapter needs to pull in the documents id not its position
+
+        // have the view pass in the document id rather than position?
+
+        // old location saver
+
+        //mDocRef = FirebaseFirestore.getInstance().collection("locations").document("loc" + locationCounter);
+
+        // need to increment id one lol
 
 
-        mDocRef.set((dataToSave)).addOnSuccessListener(new OnSuccessListener<Void>() {
+        if(locationDocID == null)
+        {
+            locationDocID = "loc0";
+        }
+
+        if(locationDocID.length() == 4)
+        {
+            locationDocID = locationDocID.substring(3);
+            Log.e("test",locationDocID);
+        }
+
+        if(locationDocID.length() == 5)
+        {
+            locationDocID = locationDocID.substring(3,5);
+            Log.e("test",locationDocID);
+        }
+
+        if(locationDocID.length() == 6)
+        {
+            locationDocID = locationDocID.substring(3,6);
+            Log.e("test",locationDocID);
+        }
+
+
+        Log.e("this is the string value", locationDocID);
+        int temp = Integer.parseInt(locationDocID);
+        temp++;
+
+
+        mDocRef = FirebaseFirestore.getInstance().collection("locations").document("loc" + temp); // this is promoted to string
+
+        LocationData locationLocalObject = new LocationData();
+
+        locationLocalObject.setAddressLineOne(addressLineOne); // normal java code now
+        locationLocalObject.setAddressLineTwo(addressLineTwo);
+        locationLocalObject.setCity(city);
+        locationLocalObject.setCity(state);
+        try
+        {
+            locationLocalObject.setZipCode(Integer.parseInt(zip));
+        } catch(Exception e)
+        {
+            // fix this later
+            locationLocalObject.setZipCode(00000);
+        }
+
+        // this saves locations to firebase --
+        mDocRef.set(locationLocalObject).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
-                Log.d("Location saved", "Location saved");
+                Log.d("HOLY MOTHER OF GOD", "Document has been saved!");
+
+                // this is to store it as a hashmap can it just be stored as the boxed type?
+                String localLocationCounter = "";
+                mLocalTotal.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if(documentSnapshot.exists())
+                        {
+                            String localLocationCounter = documentSnapshot.getString(LOCATION_COUNTER_FB);
+                        }
+                        else
+                        {
+                            String localLocationCounter = "0";
+                        }
+                    }
+                });
+                int temp =0;
+                try{
+                    temp = Integer.parseInt(localLocationCounter);
+                }catch(Exception e)
+                {
+
+                }
+                temp++;
+                // this is overly complicated to store as a hashmap
+                Map<String,Object> locationCounterOnFireBase = new HashMap<String, Object>();
+                locationCounterOnFireBase.put(LOCATION_COUNTER_FB,Integer.toString(temp));
+
+                mLocalTotal.set(locationCounterOnFireBase).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        // actually puts the value up
+                    }
+                });
+
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Log.d("Loc didn't save", "didn't save loc");
+                Log.d("WE CANT DO IT CAPTAIN", "didn't save document");
             }
         });
+
+
+
+//        OBJECTTESTREF.set(CASTLEBRAVO).addOnSuccessListener(new OnSuccessListener<Void>() {
+//            @Override
+//            public void onSuccess(Void aVoid) {
+//                Log.d("HOLY MOTHER OF GOD", "Document has been saved!");
+//            }
+//        }).addOnFailureListener(new OnFailureListener() {
+//            @Override
+//            public void onFailure(@NonNull Exception e) {
+//                Log.d("WE CANT DO IT CAPTAIN", "didn't save document");
+//            }
+//        });
+
+
+        // replace this with your new object
+        // old code
+        // old code
+        // old code
+//        Map<String,Object> dataToSave = new HashMap<String,Object>();
+//
+//        // don't need to add counter because it is save on doc name?
+//        dataToSave.put(ADDRESS,addressLineOne);
+//        dataToSave.put(ADDRESS_2,addressLineTwo);
+//        dataToSave.put(CITY,city);
+//        dataToSave.put(STATE,state);
+//        dataToSave.put(ZIP,zip);
+        // old code
+        // old code
+        // old code
+
+//
+//        mDocRef.set((dataToSave)).addOnSuccessListener(new OnSuccessListener<Void>() {
+//            @Override
+//            public void onSuccess(Void aVoid) {
+//                Log.d("Location saved", "Location saved");
+//            }
+//        }).addOnFailureListener(new OnFailureListener() {
+//            @Override
+//            public void onFailure(@NonNull Exception e) {
+//                Log.d("Loc didn't save", "didn't save loc");
+//            }
+//        });
 
 
         //NOTE code to send data to firebase when user is finished adding/removing rooms
