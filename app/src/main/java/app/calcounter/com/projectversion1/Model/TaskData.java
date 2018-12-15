@@ -19,28 +19,19 @@ public class TaskData {
     private String employee2;
     private String employee3;
     private String employee4;
-    private String employee5;
-    private String employee6;
-    private String employee7;
-    private String employee8;
+
 
     private double emp1Hours;
     private double emp2Hours;
     private double emp3Hours;
     private double emp4Hours;
-    private double emp5Hours;
-    private double emp6Hours;
-    private double emp7Hours;
-    private double emp8Hours;
+
 
     private double emp1Wage;
     private double emp2Wage;
     private double emp3Wage;
     private double emp4Wage;
-    private double emp5Wage;
-    private double emp6Wage;
-    private double emp7Wage;
-    private double emp8Wage;
+
 
 
     private String room1;
@@ -55,18 +46,7 @@ public class TaskData {
     private String roomde5;
     private String room6;
     private String roomde6;
-    private String room7;
-    private String roomde7;
-    private String room8;
-    private String roomde8;
-    private String room9;
-    private String roomde9;
-    private String room10;
-    private String roomde10;
-    private String room11;
-    private String roomde11;
-    private String room12;
-    private String roomde12;
+
 
     private String materials1;
     private String materialsDetail1;
@@ -86,23 +66,7 @@ public class TaskData {
     private String materials6;
     private String materialsDetail6;
 
-    private String materials7;
-    private String materialsDetail7;
 
-    private String materials8;
-    private String materialsDetail8;
-
-    private String materials9;
-    private String materialsDetail9;
-
-    private String materials10;
-    private String materialsDetail10;
-
-    private String materials11;
-    private String materialsDetail11;
-
-    private String materials12;
-    private String materialsDetail12;
 
     private String image1Loc;
     private String image2Loc;
@@ -110,12 +74,7 @@ public class TaskData {
     private String image4Loc;
     private String image5Loc;
     private String image6Loc;
-    private String image7Loc;
-    private String image8Loc;
-    private String image9Loc;
-    private String image10Loc;
-    private String image11Loc;
-    private String image12Loc;
+
 
     private String gpsCoordinate;
 
@@ -225,37 +184,9 @@ public class TaskData {
         this.employee4 = employee4;
     }
 
-    public String getEmployee5() {
-        return employee5;
-    }
 
-    public void setEmployee5(String employee5) {
-        this.employee5 = employee5;
-    }
 
-    public String getEmployee6() {
-        return employee6;
-    }
 
-    public void setEmployee6(String employee6) {
-        this.employee6 = employee6;
-    }
-
-    public String getEmployee7() {
-        return employee7;
-    }
-
-    public void setEmployee7(String employee7) {
-        this.employee7 = employee7;
-    }
-
-    public String getEmployee8() {
-        return employee8;
-    }
-
-    public void setEmployee8(String employee8) {
-        this.employee8 = employee8;
-    }
 
     public double getEmp1Hours() {
         return emp1Hours;
@@ -289,37 +220,9 @@ public class TaskData {
         this.emp4Hours = emp4Hours;
     }
 
-    public double getEmp5Hours() {
-        return emp5Hours;
-    }
 
-    public void setEmp5Hours(double emp5Hours) {
-        this.emp5Hours = emp5Hours;
-    }
 
-    public double getEmp6Hours() {
-        return emp6Hours;
-    }
 
-    public void setEmp6Hours(double emp6Hours) {
-        this.emp6Hours = emp6Hours;
-    }
-
-    public double getEmp7Hours() {
-        return emp7Hours;
-    }
-
-    public void setEmp7Hours(double emp7Hours) {
-        this.emp7Hours = emp7Hours;
-    }
-
-    public double getEmp8Hours() {
-        return emp8Hours;
-    }
-
-    public void setEmp8Hours(double emp8Hours) {
-        this.emp8Hours = emp8Hours;
-    }
 
     public double getEmp1Wage() {
         return emp1Wage;
@@ -353,37 +256,7 @@ public class TaskData {
         this.emp4Wage = emp4Wage;
     }
 
-    public double getEmp5Wage() {
-        return emp5Wage;
-    }
 
-    public void setEmp5Wage(double emp5Wage) {
-        this.emp5Wage = emp5Wage;
-    }
-
-    public double getEmp6Wage() {
-        return emp6Wage;
-    }
-
-    public void setEmp6Wage(double emp6Wage) {
-        this.emp6Wage = emp6Wage;
-    }
-
-    public double getEmp7Wage() {
-        return emp7Wage;
-    }
-
-    public void setEmp7Wage(double emp7Wage) {
-        this.emp7Wage = emp7Wage;
-    }
-
-    public double getEmp8Wage() {
-        return emp8Wage;
-    }
-
-    public void setEmp8Wage(double emp8Wage) {
-        this.emp8Wage = emp8Wage;
-    }
 
     public String getRoom1() {
         return room1;
@@ -481,101 +354,7 @@ public class TaskData {
         this.roomde6 = roomde6;
     }
 
-    public String getRoom7() {
-        return room7;
-    }
 
-    public void setRoom7(String room7) {
-        this.room7 = room7;
-    }
-
-    public String getRoomde7() {
-        return roomde7;
-    }
-
-    public void setRoomde7(String roomde7) {
-        this.roomde7 = roomde7;
-    }
-
-    public String getRoom8() {
-        return room8;
-    }
-
-    public void setRoom8(String room8) {
-        this.room8 = room8;
-    }
-
-    public String getRoomde8() {
-        return roomde8;
-    }
-
-    public void setRoomde8(String roomde8) {
-        this.roomde8 = roomde8;
-    }
-
-    public String getRoom9() {
-        return room9;
-    }
-
-    public void setRoom9(String room9) {
-        this.room9 = room9;
-    }
-
-    public String getRoomde9() {
-        return roomde9;
-    }
-
-    public void setRoomde9(String roomde9) {
-        this.roomde9 = roomde9;
-    }
-
-    public String getRoom10() {
-        return room10;
-    }
-
-    public void setRoom10(String room10) {
-        this.room10 = room10;
-    }
-
-    public String getRoomde10() {
-        return roomde10;
-    }
-
-    public void setRoomde10(String roomde10) {
-        this.roomde10 = roomde10;
-    }
-
-    public String getRoom11() {
-        return room11;
-    }
-
-    public void setRoom11(String room11) {
-        this.room11 = room11;
-    }
-
-    public String getRoomde11() {
-        return roomde11;
-    }
-
-    public void setRoomde11(String roomde11) {
-        this.roomde11 = roomde11;
-    }
-
-    public String getRoom12() {
-        return room12;
-    }
-
-    public void setRoom12(String room12) {
-        this.room12 = room12;
-    }
-
-    public String getRoomde12() {
-        return roomde12;
-    }
-
-    public void setRoomde12(String roomde12) {
-        this.roomde12 = roomde12;
-    }
 
     public String getMaterials1() {
         return materials1;
@@ -673,101 +452,7 @@ public class TaskData {
         this.materialsDetail6 = materialsDetail6;
     }
 
-    public String getMaterials7() {
-        return materials7;
-    }
 
-    public void setMaterials7(String materials7) {
-        this.materials7 = materials7;
-    }
-
-    public String getMaterialsDetail7() {
-        return materialsDetail7;
-    }
-
-    public void setMaterialsDetail7(String materialsDetail7) {
-        this.materialsDetail7 = materialsDetail7;
-    }
-
-    public String getMaterials8() {
-        return materials8;
-    }
-
-    public void setMaterials8(String materials8) {
-        this.materials8 = materials8;
-    }
-
-    public String getMaterialsDetail8() {
-        return materialsDetail8;
-    }
-
-    public void setMaterialsDetail8(String materialsDetail8) {
-        this.materialsDetail8 = materialsDetail8;
-    }
-
-    public String getMaterials9() {
-        return materials9;
-    }
-
-    public void setMaterials9(String materials9) {
-        this.materials9 = materials9;
-    }
-
-    public String getMaterialsDetail9() {
-        return materialsDetail9;
-    }
-
-    public void setMaterialsDetail9(String materialsDetail9) {
-        this.materialsDetail9 = materialsDetail9;
-    }
-
-    public String getMaterials10() {
-        return materials10;
-    }
-
-    public void setMaterials10(String materials10) {
-        this.materials10 = materials10;
-    }
-
-    public String getMaterialsDetail10() {
-        return materialsDetail10;
-    }
-
-    public void setMaterialsDetail10(String materialsDetail10) {
-        this.materialsDetail10 = materialsDetail10;
-    }
-
-    public String getMaterials11() {
-        return materials11;
-    }
-
-    public void setMaterials11(String materials11) {
-        this.materials11 = materials11;
-    }
-
-    public String getMaterialsDetail11() {
-        return materialsDetail11;
-    }
-
-    public void setMaterialsDetail11(String materialsDetail11) {
-        this.materialsDetail11 = materialsDetail11;
-    }
-
-    public String getMaterials12() {
-        return materials12;
-    }
-
-    public void setMaterials12(String materials12) {
-        this.materials12 = materials12;
-    }
-
-    public String getMaterialsDetail12() {
-        return materialsDetail12;
-    }
-
-    public void setMaterialsDetail12(String materialsDetail12) {
-        this.materialsDetail12 = materialsDetail12;
-    }
 
     public String getImage1Loc() {
         return image1Loc;
@@ -817,53 +502,7 @@ public class TaskData {
         this.image6Loc = image6Loc;
     }
 
-    public String getImage7Loc() {
-        return image7Loc;
-    }
 
-    public void setImage7Loc(String image7Loc) {
-        this.image7Loc = image7Loc;
-    }
-
-    public String getImage8Loc() {
-        return image8Loc;
-    }
-
-    public void setImage8Loc(String image8Loc) {
-        this.image8Loc = image8Loc;
-    }
-
-    public String getImage9Loc() {
-        return image9Loc;
-    }
-
-    public void setImage9Loc(String image9Loc) {
-        this.image9Loc = image9Loc;
-    }
-
-    public String getImage10Loc() {
-        return image10Loc;
-    }
-
-    public void setImage10Loc(String image10Loc) {
-        this.image10Loc = image10Loc;
-    }
-
-    public String getImage11Loc() {
-        return image11Loc;
-    }
-
-    public void setImage11Loc(String image11Loc) {
-        this.image11Loc = image11Loc;
-    }
-
-    public String getImage12Loc() {
-        return image12Loc;
-    }
-
-    public void setImage12Loc(String image12Loc) {
-        this.image12Loc = image12Loc;
-    }
 
     public String getGpsCoordinate() {
         return gpsCoordinate;

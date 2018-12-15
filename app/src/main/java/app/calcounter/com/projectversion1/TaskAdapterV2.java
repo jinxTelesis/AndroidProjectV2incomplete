@@ -30,19 +30,14 @@ import java.util.Map;
 import app.calcounter.com.projectversion1.Model.LocationListItem;
 
 
-public class AdminLocationsAdapter extends RecyclerView.Adapter<AdminLocationsAdapter.ViewHolder>{
+public class TaskAdapterV2 extends RecyclerView.Adapter<TaskAdapterV2.ViewHolder>{
 
-    // justins
-    // justins
-    // justins
-
-    //private DocumentReference mDocRef;
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     private Context context;
     private List<LocationListItem> listItems;
 
-    public AdminLocationsAdapter(Context context, List listItem)
+    public TaskAdapterV2(Context context, List listItem)
     {
         this.context = context;
         this.listItems = listItem; // need to inflate xml file and make
@@ -54,8 +49,8 @@ public class AdminLocationsAdapter extends RecyclerView.Adapter<AdminLocationsAd
         return new ViewHolder(view);
     }
 
-    @Override
-    public void onBindViewHolder(AdminLocationsAdapter.ViewHolder holder, int position) {
+    @Override // will this inflate that same xml
+    public void onBindViewHolder(TaskAdapterV2.ViewHolder holder, int position) {
 
         LocationListItem item = listItems.get(position); // list position
         holder.name.setText(item.getName()); // first text item
@@ -157,18 +152,18 @@ public class AdminLocationsAdapter extends RecyclerView.Adapter<AdminLocationsAd
                             alert.show();
                         }
                     }).setNeutralButton("View data", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            Intent intent = new Intent(context, TaskViewer.class);
-                            intent.putExtra("positonFromLocationAdapter", position); // not sure if this works correctly
-                            //intent.putExtra()
-                            // need to pass it the document id not the position number
-                            Log.e("admin Location adapter postion", Integer.toString(position));
-                            intent.putExtra("isView", true);
-                            //intent.putExtra("address", listItems.get(getAdapterPosition()).getName());
-                            //intent.putExtra("address2",listItems.get(getAdapterPosition()).getDescription());
-                            context.startActivity(intent);
-                            // does not add it yet, on the
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    Intent intent = new Intent(context, TaskViewer.class);
+                    intent.putExtra("positonFromLocationAdapter", position); // not sure if this works correctly
+                    //intent.putExtra()
+                    // need to pass it the document id not the position number
+                    Log.e("admin Location adapter postion", Integer.toString(position));
+                    intent.putExtra("isView", true);
+                    //intent.putExtra("address", listItems.get(getAdapterPosition()).getName());
+                    //intent.putExtra("address2",listItems.get(getAdapterPosition()).getDescription());
+                    context.startActivity(intent);
+                    // does not add it yet, on the
 
 
                 }
@@ -180,5 +175,3 @@ public class AdminLocationsAdapter extends RecyclerView.Adapter<AdminLocationsAd
             Toast.makeText(context, item.getName(), Toast.LENGTH_LONG).show();
         }
     }
-}
-

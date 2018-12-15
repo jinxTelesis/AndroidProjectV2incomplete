@@ -52,9 +52,14 @@ public class AdminLocationsActivity extends Activity {
     private List<LocationListItem> listItems;
     private int dynamicCount = 0;
     private String lastDocumentID;
+    private int newLocationCounter =0;
+
+
+    private int innerI =0;
+
+    //LocationData[] locationData = new LocationData[12];
 
     LocationData locationData = new LocationData();
-
 
 
 
@@ -77,7 +82,10 @@ public class AdminLocationsActivity extends Activity {
 
 
 
-
+//        for(int i = 0; i < 12; i++)
+//        {
+//            locationData[i] = new LocationData();
+//        }
 
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerviewdre);
@@ -85,10 +93,50 @@ public class AdminLocationsActivity extends Activity {
 //
         listItems = new ArrayList<LocationListItem>();
 
-        // could preload the address names then write them as needed
 
-        // this gets all docsthe collection
-        // don't move this to on create please
+
+//        db.collection("locations") // will iterate over the collection
+//                .get() // this listener should be safe for activity change
+//                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                        if(task.isSuccessful())
+//                        {
+//                            for(QueryDocumentSnapshot document : task.getResult())
+//                            {
+//                                newLocationCounter++;
+//                            }
+//
+//                        }else
+//                        {
+//                        }
+//                    }
+//                });
+//
+//        for(innerI =0; innerI < newLocationCounter; innerI++)
+//        {
+//            mDocRef = FirebaseFirestore.getInstance().collection("locations").document("loc" + newLocationCounter);
+//
+//            mDocRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+//                @Override
+//                public void onSuccess(DocumentSnapshot documentSnapshot) {
+//                    // this had to be final lol
+//                    locationData[innerI] = documentSnapshot.toObject(LocationData.class);
+//                }
+//            });
+//        }
+//        innerI = 0; // reset innerI
+//
+//        for(int i =0; i < newLocationCounter; i++)
+//        {
+//            LocationListItem item = new LocationListItem(locationData[i].getAddressLineOne().toString(),locationData[i].getCity().toString());
+//            listItems.add(item);
+//        }
+//
+//        adapter = new AdminLocationsAdapter(AdminLocationsActivity.this,listItems); // object not the class
+//        recyclerView.setAdapter(adapter);
+
+
         db.collection("locations") // will iterate over the collection
                 .get() // this listener should be safe for activity change
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -96,36 +144,22 @@ public class AdminLocationsActivity extends Activity {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if(task.isSuccessful())
                         {
-                            for(QueryDocumentSnapshot document : task.getResult())
+                            for(DocumentSnapshot document : task.getResult())
                             {
 
-                                //Todo this breaks if it returns from the view
-                                // change it so null subfields don't trip this up
-                                // need a real solution to this not hack
+                                LocationData newTestLoc = document.toObject(LocationData.class);
 
-                                //if(document.getData() != null && document.get(ADDRESS) != null) // prevents crash if null data
-                                //{
+                                newTestLoc.getAddressLineOne();
 
-                                Log.e("document id is ", document.getId());
+                                //Log.e("document id is ", document.getId());
                                 lastDocumentID = document.getId();
 
 
-                                    locationCounter++;
-                                    mDocRef = FirebaseFirestore.getInstance().collection("locations").document("loc" + locationCounter);
+                                locationCounter++;
 
-                                    mDocRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                                        @Override
-                                        public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                            locationData = documentSnapshot.toObject(LocationData.class);
-                                        }
-                                    });
-
-
-
-                                    LocationListItem item = new LocationListItem((String)document.getId().toString(),
-                                            locationData.getAddressLineOne().toString());
-                                    listItems.add(item);
-                                    //Log.e("it worked like a charm", document.getId() + " => " + document.getData());
+                                LocationListItem item = new LocationListItem(newTestLoc.getAddressLineOne(),newTestLoc.getCity());
+                                listItems.add(item);
+                                //Log.e("it worked like a charm", document.getId() + " => " + document.getData());
                                 //}
 
                             }
@@ -141,6 +175,69 @@ public class AdminLocationsActivity extends Activity {
 
                     }
                 });
+
+
+
+
+
+
+        // this gets all docsthe collection
+        // don't move this to on create please
+//        db.collection("locations") // will iterate over the collection
+//                .get() // this listener should be safe for activity change
+//                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                        if(task.isSuccessful())
+//                        {
+//                            for(QueryDocumentSnapshot document : task.getResult())
+//                            {
+//
+//                                //Todo this breaks if it returns from the view
+//                                // change it so null subfields don't trip this up
+//                                // need a real solution to this not hack
+//
+//                                //if(document.getData() != null && document.get(ADDRESS) != null) // prevents crash if null data
+//                                //{
+//
+//                                Log.e("document id is ", document.getId());
+//                                lastDocumentID = document.getId();
+//
+//
+//                                    locationCounter++;
+//                                    mDocRef = FirebaseFirestore.getInstance().collection("locations").document(lastDocumentID);
+//
+//                                    mDocRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+//                                        @Override
+//                                        public void onSuccess(DocumentSnapshot documentSnapshot) {
+//                                            locationData = documentSnapshot.toObject(LocationData.class);
+//                                        }
+//                                    });
+//
+//
+//
+//
+//
+//
+//                                    //LocationListItem item = new LocationListItem((String)document.getId().toString(),
+//                                    //        document.getData());
+//                                    //listItems.add(item);
+//                                    //Log.e("it worked like a charm", document.getId() + " => " + document.getData());
+//                                //}
+//
+//                            }
+//
+//                        }else
+//                        {
+//                            //Log.e("Firebase blows", "error", task.getException());
+//                        }
+//
+//                        //Log.e("readout", String.valueOf(listItems.size()));
+//                        adapter = new AdminLocationsAdapter(AdminLocationsActivity.this,listItems); // object not the class
+//                        recyclerView.setAdapter(adapter);
+//
+//                    }
+//                });
 
 
 
@@ -168,7 +265,47 @@ public class AdminLocationsActivity extends Activity {
         //adapter.notifyDataSetChanged();
         recyclerView.removeAllViewsInLayout();
 
-        //recyclerView.setAdapter(adapter);
+//        db.collection("locations") // will iterate over the collection
+//                .get() // this listener should be safe for activity change
+//                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                        if(task.isSuccessful())
+//                        {
+//                            for(QueryDocumentSnapshot document : task.getResult())
+//                            {
+//                                newLocationCounter++;
+//                            }
+//
+//                        }else
+//                        {
+//                        }
+//                    }
+//                });
+//
+//        for(innerI =0; innerI < newLocationCounter; innerI++)
+//        {
+//            mDocRef = FirebaseFirestore.getInstance().collection("locations").document("loc" + newLocationCounter);
+//
+//            mDocRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+//                @Override
+//                public void onSuccess(DocumentSnapshot documentSnapshot) {
+//                    // this had to be final lol
+//                    locationData[innerI] = documentSnapshot.toObject(LocationData.class);
+//                }
+//            });
+//        }
+//        innerI = 0; // reset innerI
+//
+//        for(int i =0; i < newLocationCounter; i++)
+//        {
+//            LocationListItem item = new LocationListItem(locationData[i].getAddressLineOne().toString(),locationData[i].getCity());
+//            listItems.add(item);
+//        }
+//
+//        adapter = new AdminLocationsAdapter(AdminLocationsActivity.this,listItems); // object not the class
+//        recyclerView.setAdapter(adapter);
+
         db.collection("locations") // will iterate over the collection
                 .get() // this listener should be safe for activity change
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -176,30 +313,21 @@ public class AdminLocationsActivity extends Activity {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if(task.isSuccessful())
                         {
-                            for(QueryDocumentSnapshot document : task.getResult())
+                            for(DocumentSnapshot document : task.getResult())
                             {
 
-                                //Todo this breaks if it returns from the view
-                                // change it so null subfields don't trip this up
-                                // need a real solution to this not hack
+                                LocationData newTestLoc = document.toObject(LocationData.class);
 
-                                //if(document.getData() != null && document.get(ADDRESS) != null) // prevents crash if null data
-                                //{
+                                newTestLoc.getAddressLineOne();
 
-                                Log.e("document id is ", document.getId());
+                                //Log.e("document id is ", document.getId());
                                 lastDocumentID = document.getId();
 
-                                locationCounter++;
-                                mDocRef = FirebaseFirestore.getInstance().collection("locations").document("loc" + locationCounter);
 
-                                mDocRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                                    @Override
-                                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                        locationData = documentSnapshot.toObject(LocationData.class);
-                                    }
-                                });
-                                LocationListItem item = new LocationListItem((String)document.getId().toString(),
-                                        locationData.getAddressLineOne().toString());
+                                locationCounter++;
+
+                                LocationListItem item = new LocationListItem("Location " + locationCounter,
+                                        " Address: " + newTestLoc.getAddressLineOne());
                                 listItems.add(item);
                                 //Log.e("it worked like a charm", document.getId() + " => " + document.getData());
                                 //}
@@ -217,6 +345,64 @@ public class AdminLocationsActivity extends Activity {
 
                     }
                 });
+
+
+
+
+
+        //recyclerView.setAdapter(adapter);
+//        db.collection("locations") // will iterate over the collection
+//                .get() // this listener should be safe for activity change
+//                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                        if(task.isSuccessful())
+//                        {
+//                            for(QueryDocumentSnapshot document : task.getResult())
+//                            {
+//
+//                                //Todo this breaks if it returns from the view
+//                                // change it so null subfields don't trip this up
+//                                // need a real solution to this not hack
+//
+//                                //if(document.getData() != null && document.get(ADDRESS) != null) // prevents crash if null data
+//                                //{
+//
+//                                Log.e("document id is ", document.getId());
+//                                lastDocumentID = document.getId();
+//
+//                                locationCounter++;
+//                                mDocRef = FirebaseFirestore.getInstance().collection("locations").document("loc" + locationCounter);
+//
+//                                mDocRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+//                                    @Override
+//                                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+//                                        locationData = documentSnapshot.toObject(LocationData.class);
+//
+//                                    }
+//                                });
+//
+//                                // this part of the data times out or something
+//
+//                                LocationListItem item = new LocationListItem((String)document.getId().toString(),
+//                                        locationData.getAddressLineOne().toString());
+//                                listItems.add(item);
+//                                //Log.e("it worked like a charm", document.getId() + " => " + document.getData());
+//                                //}
+//
+//                            }
+//
+//                        }else
+//                        {
+//                            //Log.e("Firebase blows", "error", task.getException());
+//                        }
+//
+//                        //Log.e("readout", String.valueOf(listItems.size()));
+//                        adapter = new AdminLocationsAdapter(AdminLocationsActivity.this,listItems); // object not the class
+//                        recyclerView.setAdapter(adapter);
+//
+//                    }
+//                });
     }
 
 

@@ -19,18 +19,7 @@ public class LocationData {
     public TaskData task10 = new TaskData();
     public TaskData task11 = new TaskData();
     public TaskData task12 = new TaskData();
-    public TaskData task13 = new TaskData();
-    public TaskData task14 = new TaskData();
-    public TaskData task15 = new TaskData();
-    public TaskData task16 = new TaskData();
-    public TaskData task17 = new TaskData();
-    public TaskData task18 = new TaskData();
-    public TaskData task19 = new TaskData();
-    public TaskData task20 = new TaskData();
-    public TaskData task21 = new TaskData();
-    public TaskData task22 = new TaskData();
-    public TaskData task23 = new TaskData();
-    public TaskData task24 = new TaskData();
+
 
     private String gpsCoordinate;
 
@@ -42,10 +31,6 @@ public class LocationData {
     private String image6;
     private String image7;
     private String image8;
-    private String image9;
-    private String image10;
-    private String image11;
-    private String image12;
 
     private String addressLineOne ="";
     private String addressLineTwo = "";
@@ -125,37 +110,6 @@ public class LocationData {
         this.image8 = image8;
     }
 
-    public String getImage9() {
-        return image9;
-    }
-
-    public void setImage9(String image9) {
-        this.image9 = image9;
-    }
-
-    public String getImage10() {
-        return image10;
-    }
-
-    public void setImage10(String image10) {
-        this.image10 = image10;
-    }
-
-    public String getImage11() {
-        return image11;
-    }
-
-    public void setImage11(String image11) {
-        this.image11 = image11;
-    }
-
-    public String getImage12() {
-        return image12;
-    }
-
-    public void setImage12(String image12) {
-        this.image12 = image12;
-    }
 
     public String getAddressLineOne() {
         return addressLineOne;
