@@ -58,7 +58,8 @@
         <activity android:name=".LoginActivity" />
         <activity android:name=".TaskActivityRuss" />
         <activity android:name=".UserActivityRuss" />
-        <activity android:name=".TaskViewerV2"></activity>
+        <activity android:name=".TaskViewerV2" />
+        <activity android:name=".AdMob"></activity>
     </application>
 
 </manifest>
