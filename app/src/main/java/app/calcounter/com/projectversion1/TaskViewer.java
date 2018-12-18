@@ -384,17 +384,17 @@ public class TaskViewer extends AppCompatActivity {
                 LinearLayout layout = new LinearLayout(context);
                 layout.setOrientation(LinearLayout.VERTICAL);
 
-// Add a TextView here for the "Title" label, as noted in the comments
+
                 final EditText inputTask = new EditText(context);
                 inputTask.setHint("Task Name");
-                layout.addView(inputTask); // Notice this is an add method
+                layout.addView(inputTask);
 
-// Add another TextView here for the "Description" label
+
                 final EditText inputPriority = new EditText(context);
                 inputPriority.setHint("Priority 1-5");
-                layout.addView(inputPriority); // Another add method
+                layout.addView(inputPriority);
 
-                builder.setView(layout); // Again this is a set method, not add
+                builder.setView(layout);
 
                 builder.setPositiveButton("Create", new DialogInterface.OnClickListener() {
                     @Override

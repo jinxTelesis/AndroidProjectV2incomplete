@@ -32,11 +32,8 @@ import app.calcounter.com.projectversion1.Model.LocationListItem;
 import app.calcounter.com.projectversion1.Model.TaskData;
 
 public class AdminLocationsActivity extends Activity {
-    // justins
-    // justins
-    // justins
 
-    // locations recyclerviewer
+
 
     // these should be moved to another file
     public static final String ADDRESS = "address";
@@ -50,16 +47,10 @@ public class AdminLocationsActivity extends Activity {
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private List<LocationListItem> listItems;
-    private int dynamicCount = 0;
     private String lastDocumentID;
-    private int newLocationCounter =0;
 
 
-    private int innerI =0;
 
-    //LocationData[] locationData = new LocationData[12];
-
-    LocationData locationData = new LocationData();
 
 
 
@@ -70,7 +61,6 @@ public class AdminLocationsActivity extends Activity {
 
     // just a counter so the adapter won't overwrite projects on delete, could just read the last location in the adapter
     // this seemed to be the least brittle solution
-    private DocumentReference mLocalTotal = FirebaseFirestore.getInstance().collection("appSetup").document("initFile");
 
     //private DocumentReference newDocRef = FirebaseFirestore.getInstance().collection("locations").document("loc10");
     //firebase code
@@ -79,6 +69,9 @@ public class AdminLocationsActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_location3);
+
+        // have it pass in the position
+        // capture the document id at that position?
 
 
 
@@ -90,7 +83,6 @@ public class AdminLocationsActivity extends Activity {
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerviewdre);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-//
         listItems = new ArrayList<LocationListItem>();
 
 
@@ -150,6 +142,7 @@ public class AdminLocationsActivity extends Activity {
                                 LocationData newTestLoc = document.toObject(LocationData.class);
 
                                 newTestLoc.getAddressLineOne();
+
 
                                 //Log.e("document id is ", document.getId());
                                 lastDocumentID = document.getId();
@@ -262,7 +255,6 @@ public class AdminLocationsActivity extends Activity {
 
         // needed it will reload all of them
         listItems.clear();
-        //adapter.notifyDataSetChanged();
         recyclerView.removeAllViewsInLayout();
 
 //        db.collection("locations") // will iterate over the collection

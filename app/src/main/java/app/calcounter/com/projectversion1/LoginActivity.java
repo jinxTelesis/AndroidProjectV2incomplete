@@ -85,13 +85,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             }
         });
 
-        Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
-        mEmailSignInButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                attemptLogin();
-            }
-        });
+        ;
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
@@ -282,7 +276,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mEmailView.setAdapter(adapter);
     }
 
-    public void nextScreen(View view)
+    public void nextScreen(View view) // change to the dummy one
     {
         startActivity(new Intent(this, LocationListActivity.class));
     }
@@ -291,6 +285,13 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     {
         startActivity(new Intent(this, AdministrativeActivity.class));
     }
+
+    public void openGps(View view)
+    {
+        startActivity(new Intent(this, TaskActivity.class));
+    }
+
+
 
 
     private interface ProfileQuery {

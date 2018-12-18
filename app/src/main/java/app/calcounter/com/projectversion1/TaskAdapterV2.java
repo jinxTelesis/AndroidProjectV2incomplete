@@ -3,7 +3,7 @@ package app.calcounter.com.projectversion1;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Parcelable;
+
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
@@ -21,24 +21,23 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.storage.StorageReference;
 
-import java.io.Serializable;
+
+
 import java.util.List;
-import java.util.Map;
+
 
 import app.calcounter.com.projectversion1.Model.LocationListItem;
 
 
-public class TaskAdapterV2 extends RecyclerView.Adapter<TaskAdapterV2.ViewHolder>{
+public class TaskAdapterV2 extends RecyclerView.Adapter<TaskAdapterV2.ViewHolder> {
 
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     private Context context;
     private List<LocationListItem> listItems;
 
-    public TaskAdapterV2(Context context, List listItem)
-    {
+    public TaskAdapterV2(Context context, List listItem) {
         this.context = context;
         this.listItems = listItem; // need to inflate xml file and make
     }
@@ -64,10 +63,9 @@ public class TaskAdapterV2 extends RecyclerView.Adapter<TaskAdapterV2.ViewHolder
         return listItems.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public TextView name;
         public TextView description;
-
 
 
         public ViewHolder(View itemView) {
@@ -95,7 +93,7 @@ public class TaskAdapterV2 extends RecyclerView.Adapter<TaskAdapterV2.ViewHolder
                             Intent intent = new Intent(context, NewLocationActivity.class);
                             intent.putExtra("isEdit", true);
                             intent.putExtra("address", listItems.get(getAdapterPosition()).getName());
-                            intent.putExtra("address2",listItems.get(getAdapterPosition()).getDescription());
+                            intent.putExtra("address2", listItems.get(getAdapterPosition()).getDescription());
                             context.startActivity(intent);
                             // does not add it yet, on the close of this? might need to modify
                         }
@@ -120,17 +118,14 @@ public class TaskAdapterV2 extends RecyclerView.Adapter<TaskAdapterV2.ViewHolder
                                                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                                                         @Override
                                                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                                            if(task.isSuccessful())
-                                                            {
-                                                                for(QueryDocumentSnapshot document : task.getResult())
-                                                                {
-                                                                    Log.e("document.getId() is here " , document.getId().toString());
+                                                            if (task.isSuccessful()) {
+                                                                for (QueryDocumentSnapshot document : task.getResult()) {
+                                                                    Log.e("document.getId() is here ", document.getId().toString());
                                                                     db.collection("tasks").document(document.getId()).delete(); // hope this works
 
                                                                 }
 
-                                                            }else
-                                                            {
+                                                            } else {
                                                                 Log.e("Firebase blows", "error", task.getException());
                                                             }
 
@@ -175,3 +170,4 @@ public class TaskAdapterV2 extends RecyclerView.Adapter<TaskAdapterV2.ViewHolder
             Toast.makeText(context, item.getName(), Toast.LENGTH_LONG).show();
         }
     }
+}

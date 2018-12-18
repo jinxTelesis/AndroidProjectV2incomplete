@@ -152,8 +152,5 @@ public class LocationData {
     }
 
 
-
-
-
 }
 

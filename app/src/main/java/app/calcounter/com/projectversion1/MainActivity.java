@@ -1,5 +1,6 @@
 package app.calcounter.com.projectversion1;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -49,6 +50,10 @@ public class MainActivity extends AppCompatActivity {
                     AuthUI.getInstance().createSignInIntentBuilder().build(),
                     RC_SIGN_IN);
         }
+
+        Intent intent = new Intent(this,SplashActivityRuss.class);
+        startActivity(intent);
+        finish();
         // copy this into every activity
         // copy this into every activity
         // copy this into every activity

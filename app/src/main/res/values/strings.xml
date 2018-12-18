@@ -28,7 +28,7 @@
     <string name="location_state">State/Province/Region</string>
     <string name="location_zip">Zip Code</string>
     <string name="location_create">Create Location</string>
-    <string name="location_edit">Edit Location/Go To Rooms</string>
+    <string name="location_edit">Go To Rooms</string>
     <string name="new_location_text">New Location</string>
     <string name="new_room_text">Add New Rooms</string>
     <string name="input_room_hint">Input Room Name</string>
@@ -133,6 +133,8 @@
     <string name="windows_blinds">Windows/Blinds</string>
     <string name="furniture">Furniture</string>
     <string name="other">Other</string>
+    <string name="tasktext">Tasks and Work Orders</string>
+    <string name="locations">Locations</string>
 
 
 </resources>

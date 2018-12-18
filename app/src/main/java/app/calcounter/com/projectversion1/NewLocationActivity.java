@@ -3,6 +3,7 @@ package app.calcounter.com.projectversion1;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,7 +12,19 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import app.calcounter.com.projectversion1.Model.LocationData;
+
 import static app.calcounter.com.projectversion1.AdminLocationsActivity.LAST_DOCUMENT_ID;
+import static app.calcounter.com.projectversion1.TaskViewer.LOCATION_COUNTER_FB;
 
 public class NewLocationActivity extends AppCompatActivity {
 
@@ -98,7 +111,7 @@ public class NewLocationActivity extends AppCompatActivity {
     public void goToAddTask()
     {
         Bundle mbundle = new Bundle();
-        Intent newTaskRec = new Intent(this, TaskViewer.class);
+        Intent newTaskRec = new Intent(this, TaskViewerV2.class);
 
         // justin's code need validation
         int validInput = 0;
@@ -132,6 +145,20 @@ public class NewLocationActivity extends AppCompatActivity {
             // this will be missing because we didn't increment in rooms
             // this is critical coming from this window
 
+            // be easier to make the location here rather than after a task
+            Integer.parseInt(zipCode.getText().toString().trim());
+            int zip =0;
+            try{
+               zip = Integer.parseInt(zipCode.getText().toString().trim());
+            } catch (Exception e)
+            {
+                zip = 00000;
+            }
+
+            createLocation(x, addressLineOne.getText().toString(), addressLineTwo.getText().toString(),city.getText().toString(), state.getText().toString(), 1);
+
+
+
             mbundle.putString(LAST_DOCUMENT_ID,lastlocationID);
             mbundle.putInt("locCounter",x); // counter for number of locations
             mbundle.putString("address", addressLineOne.getText().toString().trim());
@@ -158,6 +185,46 @@ public class NewLocationActivity extends AppCompatActivity {
 
 
     }
+
+    public void createLocation(int locationDocID, String addressLineOne, String addressLineTwo, String city, String state, int zip)
+    {
+
+        DocumentReference mDocRef;
+        int temp = locationDocID;
+        temp++;
+
+
+        mDocRef = FirebaseFirestore.getInstance().collection("locations").document("loc" + temp); // this is promoted to string
+
+        LocationData locationLocalObject = new LocationData();
+
+        locationLocalObject.setAddressLineOne(addressLineOne); // normal java code now
+        locationLocalObject.setAddressLineTwo(addressLineTwo);
+        locationLocalObject.setCity(city);
+        locationLocalObject.setCity(state);
+        try
+        {
+            locationLocalObject.setZipCode(zip);
+        } catch(Exception e)
+        {
+            // fix this later
+            locationLocalObject.setZipCode(00000);
+        }
+
+        // this saves locations to firebase --
+        mDocRef.set(locationLocalObject).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                //
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+
+            }
+        });
+    }
+
 
     public void goToAddRooms(View view){
         //sends all the data to rooms activity to handle everything when the user finishes

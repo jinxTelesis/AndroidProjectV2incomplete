@@ -1,5 +1,6 @@
 package app.calcounter.com.projectversion1;
 
+
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -26,7 +27,7 @@ public class InspectionActivityRuss extends AppCompatActivity
 
 
 
-String actualLocation;
+    String actualLocation;
     int locationSelected = 0;
     ImageView gallery;
 //Button btn_generate = (Button)findViewById(R.id.generate);
@@ -291,3 +292,4 @@ String actualLocation;
 
     }
 }
+

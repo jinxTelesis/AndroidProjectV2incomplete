@@ -19,7 +19,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LoginActivity">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -27,7 +27,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".SplashActivityRuss"
             android:label="@string/title_activity_task_viewer"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".DetailsActivity" />
@@ -55,7 +55,7 @@
         <activity android:name=".MaterialActivityRuss" />
         <activity android:name=".NewLocationActivityRuss" />
         <activity android:name=".NewTaskActivityRuss" />
-        <activity android:name=".SplashActivityRuss" />
+        <activity android:name=".LoginActivity" />
         <activity android:name=".TaskActivityRuss" />
         <activity android:name=".UserActivityRuss" />
         <activity android:name=".TaskViewerV2"></activity>

@@ -20,6 +20,6 @@ public class UserActivityRuss extends AppCompatActivity {
 
     public void openInspection(View view) {startActivity(new Intent(this, InspectionActivityRuss.class)); }
 
-    public void openLocations(View view) {startActivity(new Intent(this, LocationListActivityRuss.class));
+    public void openLocations(View view) {startActivity(new Intent(this, AdminLocationsActivity.class));
     }
 }
