@@ -201,30 +201,7 @@ public class TaskViewerV2 extends AppCompatActivity {
 
 
 
-        // this does not work good try
-//        db.collection("locations") // will iterate over the collection
-//                .get() // this listener should be safe for activity change
-//                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-//                        if(task.isSuccessful())
-//                        {
-//                            for(DocumentSnapshot document : task.getResult())
-//                            {
-//                                captureCounter++;
-//                                if(captureCounter == adapterPosition) // this should leave the data object in the correct spot
-//                                {
-//                                    locationData = document.toObject(LocationData.class);
-//                                    Log.e("this fired!", "we need this to fire");
-//                                }
-//                            }
-//
-//                        }else
-//                        {
-//                            //Log.e("Firebase blows", "error", task.getException());
-//                        }
-//                    }
-//                });
+
 
 
         // need to add tasks before we can read
